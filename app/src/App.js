@@ -1,23 +1,22 @@
-import logo from './logo.svg';
 import './App.css';
+import { Route, Routes } from "react-router-dom";
+import { React } from "react";
+import ASVSPage from "./pages/ASVSPage";
 
 function App() {
+  // const [getBlogContent, setGetBlogContent] = useState([]);
+  // const getData = (blog) => {
+  //   setGetBlogContent(blog);
+  // }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="container">
+        <Routes>
+          {/*<Route path="/" element={<HomePage data={getData}/>} />*/}
+          {/*<Route path="/blog/:id" element={<BlogPost content={getBlogContent}/>} />*/}
+          <Route path="/" element={<ASVSPage/>} />
+        </Routes>
+      </div>
     </div>
   );
 }
