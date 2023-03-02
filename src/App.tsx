@@ -104,7 +104,22 @@ class App extends React.Component<any, any> {
                 </header>
                 <div className="container">
                     <h1>ASVS for Dummies <small>(ASVS 4.0)</small></h1>
-                    <ASVSListFilter chapters={this.state.chapters}
+                    <p><strong>tips:</strong></p>
+                    <ol>
+                        <li>
+                        Gebruik de <a target="_blank" href="https://owasp.org/www-project-secure-coding-practices-quick-reference-guide/">
+                        quick reference guide</a>, daar wordt per requirement zoveel mogelijk naar verwezen.
+                        </li>
+                        <li>
+                        Filter op level 1 en dan op een hoofdstuk. Zo kun je gestructureerd requirements verwerken.
+                        </li>
+                        <li>
+                        Ga voor een requirement na of dit al afgevangen is door het framework. Voorbeeld behorend bij chapter Authentication, zoek op Google naar: 'identity framework password requirements'.
+                        </li>
+                    </ol>
+
+                    <ASVSListFilter
+                                    chapters={this.state.chapters}
                                     setChapterCheck={(c: string) => this.setChapterCheck(c)}
                                     setLevelCheck={(c: string) => this.setLevelCheck(c)}/>
                     <ASVSList items={this.state.asvsItems}></ASVSList>

@@ -20,7 +20,7 @@ class ASVSList extends React.Component<any, Props> {
             <div className="ASVSListItem">
                 <div><h4>Chapter, Section & Id</h4></div>
                 <div><h4>Requirement</h4></div>
-                <div><h4>Quickreference guide chapter</h4></div>
+                <div><h4>Quick reference guide chapter</h4></div>
             </div>
             {this.props.items.map((item: ASVSItem, index: number) => {
                 return <div key={`item-${index.toString()}`}
