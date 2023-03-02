@@ -1,0 +1,36 @@
+p {
+    margin: 0px;
+}
+
+.ASVSListItem{
+    display: flex;
+
+}
+
+.ASVSListItem div{
+
+}
+
+.ASVSListItem div:first-child{
+    display:flex;
+    width: 30%;
+    flex-direction: column;
+    padding: 15px 15px 0px 0px;
+}
+
+.ASVSListItem div:nth-child(2){
+    display: flex;
+    width: 40%;
+    padding: 15px 15px 0px 0px;
+}
+
+.ASVSListItem div:last-child{
+    display: flex;
+    width: 30%;
+    padding: 15px 0px 0px 0px;
+}
+
+.hide{
+    display: none;
+}
+

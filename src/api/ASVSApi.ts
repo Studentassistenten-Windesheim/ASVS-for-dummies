@@ -1,11 +1,39 @@
-export const asvsList = async ()=>{
-    return items;
+
+//                 if (chapterToQuickReferenceMap[n.chapter_name]) {
+//                     n.measuments =
+//                         `Technische maatregelen in OWASP Quickreference hoofdstuk '${chapterToQuickReferenceMap[n.chapter_name]}'`;
+//
+//
+//               }
+
+export const chapterToQuickReferenceMap : any = {
+    "Session Management": ["Session Management"],
+    "Authentication": ["Authentication and Password Management"],
+    "Access Control": ["Access Control"],
+    "Validation, Sanitization and Encoding": ["Input Validation", "Output Encoding"],
+    "Stored Cryptography": ["Cryptographic Practices"],
+    "Error Handling and Logging": ["Error Handling and Logging"],
+    "Data Protection": ["Data Protection"],
+    "Communication": ["Communication Security"],
+    "Malicious Code": [],
+    "Business Logic": [],
+    "Files and Resources": ["File Management"],
+    "API and Web Service": [],
+    "Configuration": ["System Configuration"]
+}
+
+export const asvsListItemsAPI = async ()=>{
+    return items.map((i:any) => {
+        i.show = true;
+        // debugger
+        i.quick_reference = chapterToQuickReferenceMap[i.chapter_name]?.toString() || 'No reference available'
+        return i;
+    })
 }
 
 const items =
 
-    {
-        "requirements": [
+ [
             {
                 "chapter_id": "V1",
                 "chapter_name": "Architecture, Design and Threat Modeling",
@@ -3725,4 +3753,4 @@ const items =
                 "nist": ""
             }
         ]
-    }
+
