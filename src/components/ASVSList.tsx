@@ -9,10 +9,6 @@ type Props = {
 
 class ASVSList extends React.Component<any, Props> {
 
-    constructor(props: Props) {
-        super(props);
-    }
-
     render() {
         return <>
             <h2>List <small>{this.props.items.filter((i: ASVSItem) => i.show).length.toString()}</small></h2>

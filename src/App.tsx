@@ -107,7 +107,7 @@ class App extends React.Component<any, any> {
                     <p><strong>tips:</strong></p>
                     <ol>
                         <li>
-                        Gebruik de <a target="_blank" href="https://owasp.org/www-project-secure-coding-practices-quick-reference-guide/">
+                        Gebruik de <a rel="noreferrer" target="_blank" href="https://owasp.org/www-project-secure-coding-practices-quick-reference-guide/">
                         quick reference guide</a>, daar wordt per requirement zoveel mogelijk naar verwezen.
                         </li>
                         <li>

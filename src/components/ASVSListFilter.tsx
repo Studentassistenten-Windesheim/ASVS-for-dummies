@@ -10,10 +10,6 @@ type Props = {
 
 class ASVSListFilter extends React.Component<any, Props> {
 
-    constructor(props: Props) {
-        super(props);
-    }
-
     render() {
         return <>
             <div className="checkboxCollections">
