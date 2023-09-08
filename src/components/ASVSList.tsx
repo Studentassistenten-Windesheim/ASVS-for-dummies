@@ -7,20 +7,22 @@ type Props = {
     items: ASVSItem[]
 }
 
-class ASVSList extends React.Component<any, Props> {
+const ASVSList: React.FC<Props> = ({ items }) => {
+    const filteredItems = items.filter((i: ASVSItem) => i.show);
 
-    render() {
-        return <>
-            <h2>List <small>{this.props.items.filter((i: ASVSItem) => i.show).length.toString()}</small></h2>
+    return (
+        <>
+            <h2>List <small>{filteredItems.length.toString()}</small></h2>
 
             <div className="ASVSListItem">
                 <div><h4>Chapter, Section & Id</h4></div>
                 <div><h4>Requirement</h4></div>
                 <div><h4>Quick reference guide chapter</h4></div>
             </div>
-            {this.props.items.map((item: ASVSItem, index: number) => {
-                return <div key={`item-${index.toString()}`}
-                            className={`ASVSListItem ${item.show} ${!item.show ? "hide" : ""}`}>
+
+            {items.map((item: ASVSItem, index: number) => (
+                <div key={`item-${index.toString()}`}
+                    className={`ASVSListItem ${item.show} ${!item.show ? "hide" : ""}`}>
                     <div>
                         <p>{item.chapter_id} {item.chapter_name}</p>
                         <p>{item.section_id} {item.section_name}</p>
@@ -36,9 +38,9 @@ class ASVSList extends React.Component<any, Props> {
                         <p>{item.quick_reference}</p>
                     </div>
                 </div>
-            })}
+            ))}
         </>
-    }
+    );
 }
 
 export default ASVSList;
