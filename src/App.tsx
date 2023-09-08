@@ -1,5 +1,4 @@
 import React from 'react';
-import './App.css';
 import ASVSListFilter from "./components/ASVSListFilter";
 import ASVSItem from "./model/ASVSItem";
 import {asvsListItemsAPI} from "./api/ASVSApi";
@@ -98,11 +97,11 @@ class App extends React.Component<any, any> {
 
     render() {
         return (
-            <div className="App">
+            <div className="flex justify-center">
                 <header className="App-header">
 
                 </header>
-                <div className="container">
+                <div className="w-4/5">
                     <h1>ASVS for Dummies <small>(ASVS 4.0)</small></h1>
                     <p><strong>tips:</strong></p>
                     <ol>
