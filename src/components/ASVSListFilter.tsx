@@ -20,23 +20,24 @@ class ASVSListFilter extends React.Component<any, Props> {
                         p[index].push(c);
                         return p;
                     }, [])
-                    .map((col: [], index: number) => {
-                        return <div key={`col- ${index.toString()}`}>
+                    .map((col: [], colIndex: number) => {
+                        return <div key={`col- ${colIndex.toString()}`}>
 
-                            {col.map((element: ASVSChapter, index: number) => {
-                                return <div key={index.toString()}>
+                            {col.map((element: ASVSChapter, rowIndex: number) => {
+                                const checkboxId = `checkbox-${colIndex}-${rowIndex}`;
+                                return <div key={rowIndex.toString()}>
 
                                     <input
 
                                         type="checkbox"
-                                        id={index.toString()}
+                                        id={checkboxId.toString()}
                                         name={element.name}
                                         value={element.checked ? 'checked' : ''}
                                         onChange={(e) => {
                                             this.props.setChapterCheck(element.name)
                                         }}
                                     />
-                                    <label htmlFor={index.toString()}>
+                                    <label htmlFor={checkboxId.toString()}>
                                         {element.name}
                                     </label>
 
