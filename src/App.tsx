@@ -104,9 +104,9 @@ class App extends React.Component<any, any> {
                 <div className="w-4/5">
                     <h1>ASVS for Dummies <small>(ASVS 4.0)</small></h1>
                     <p><strong>tips:</strong></p>
-                    <ol>
+                    <ol className='list-decimal my-4 ml-8'>
                         <li>
-                        Gebruik de <a rel="noreferrer" target="_blank" href="https://owasp.org/www-project-secure-coding-practices-quick-reference-guide/">
+                        Gebruik de <a rel="noreferrer" className='text-blue-500 hover:text-blue-700' target="_blank" href="https://owasp.org/www-project-secure-coding-practices-quick-reference-guide/">
                         quick reference guide</a>, daar wordt per requirement zoveel mogelijk naar verwezen.
                         </li>
                         <li>

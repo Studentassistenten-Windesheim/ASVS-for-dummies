@@ -1,6 +1,5 @@
 import React from "react";
 import ASVSChapter from "../model/ASVSChapter";
-import './ASVSListFilter.css';
 
 type Props = {
     chapters: ASVSChapter[],
@@ -12,7 +11,7 @@ class ASVSListFilter extends React.Component<any, Props> {
 
     render() {
         return <>
-            <div className="checkboxCollections">
+            <div className="flex justify-between mt-4">
                 {this.props.chapters
                     .reduce((p: any, c: ASVSChapter, i: number) => {
                         const index = i % 4;
@@ -21,14 +20,13 @@ class ASVSListFilter extends React.Component<any, Props> {
                         return p;
                     }, [])
                     .map((col: [], colIndex: number) => {
-                        return <div key={`col- ${colIndex.toString()}`}>
+                        return <div key={`col-${colIndex.toString()}`}>
 
                             {col.map((element: ASVSChapter, rowIndex: number) => {
                                 const checkboxId = `checkbox-${colIndex}-${rowIndex}`;
                                 return <div key={rowIndex.toString()}>
 
                                     <input
-
                                         type="checkbox"
                                         id={checkboxId.toString()}
                                         name={element.name}
