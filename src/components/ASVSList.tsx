@@ -1,7 +1,5 @@
 import ASVSItem from "../model/ASVSItem";
 import React from "react";
-import './ASVSList.css';
-import './ASVSListItem.css';
 
 type Props = {
     items: ASVSItem[]
@@ -12,33 +10,38 @@ const ASVSList: React.FC<Props> = ({ items }) => {
 
     return (
         <>
-            <h2>List <small>{filteredItems.length.toString()}</small></h2>
+            <h2 className='mt-6'>List <small>{filteredItems.length.toString()}</small></h2>
 
-            <div className="ASVSListItem">
-                <div><h4>Chapter, Section & Id</h4></div>
-                <div><h4>Requirement</h4></div>
-                <div><h4>Quick reference guide chapter</h4></div>
-            </div>
-
-            {items.map((item: ASVSItem, index: number) => (
-                <div key={`item-${index.toString()}`}
-                    className={`ASVSListItem ${item.show} ${!item.show ? "hide" : ""}`}>
-                    <div>
-                        <p>{item.chapter_id} {item.chapter_name}</p>
-                        <p>{item.section_id} {item.section_name}</p>
-                        <p>Level 1 {item.level1}</p>
-                        <p>Level 2 {item.level2}</p>
-                        <p>Level 3 {item.level3}</p>
-                    </div>
-                    <div>
-                        <p>{item.req_id} &nbsp;
-                            {item.req_description}</p>
-                    </div>
-                    <div>
-                        <p>{item.quick_reference}</p>
-                    </div>
-                </div>
-            ))}
+            <table className='border-separate border-spacing-2'>
+                <thead>
+                    <tr className='text-left'>
+                        <th>Chapter, Section & Id</th>
+                        <th className='w-2/5'>Requirement</th>
+                        <th className='w-[30%]'>Quick reference guide chapter</th>
+                    </tr>
+                </thead>
+                <tbody className='align-text-top'>
+                    {items.map((item: ASVSItem, index: number) => (
+                        <tr key={`item-${index.toString()}`}
+                                    className={`${item.show} ${!item.show ? "hidden" : ""}`}>
+                            <td>
+                                {item.chapter_id} {item.chapter_name} <br/>
+                                {item.section_id} {item.section_name} <br/>
+                                Level 1 {item.level1} <br/>
+                                Level 2 {item.level2} <br/>
+                                Level 3 {item.level3} 
+                            </td>
+                            <td> 
+                                {item.req_id} &nbsp;
+                                    {item.req_description}
+                            </td>
+                            <td>
+                                {item.quick_reference}
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
         </>
     );
 }
