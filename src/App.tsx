@@ -24,27 +24,28 @@ const router = createBrowserRouter([
 const App = () => {
 
     return (
-        <div className="flex justify-center">
-            <header className="App-header">
-
+        <>
+            <header className="header sticky top-0 bg-white shadow-md flex items-center justify-between px-8 py-02">
+                <nav className="nav font-semibold text-lg">
+                    <ul className="flex items-center">
+                        <li className="p-4 hover:text-blue-500 duration-200 cursor-pointer">
+                            <a href="/">Home</a>
+                        </li>
+                        <li className="p-4 hover:text-blue-500 duration-200 cursor-pointer">
+                            <a href="/tips">Tips</a>
+                        </li>
+                    </ul>
+                </nav>
             </header>
-            <nav>
-                <ul>
-                    <li>
-                        <a href={`/`}>Home</a>
-                    </li>
-                    <li>
-                        <a href={`/tips`}>Tips</a>
-                    </li>
-                </ul>
-            </nav>
-            <div className="container">
-                <React.StrictMode>
-                    <RouterProvider router={router} />
-                </React.StrictMode>
-
+            <div className="flex justify-center">
+                <div className="w-4/5 pt-3">
+                    <React.StrictMode>
+                        <RouterProvider router={router} />
+                    </React.StrictMode>
+                </div>
             </div>
-        </div>
+        </>
+
     );
 }
 
