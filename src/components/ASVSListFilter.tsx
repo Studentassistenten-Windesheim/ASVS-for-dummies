@@ -1,6 +1,5 @@
 import React from "react";
 import ASVSChapter from "../model/ASVSChapter";
-import './ASVSListFilter.css';
 
 type Props = {
     chapters: ASVSChapter[],
@@ -8,12 +7,11 @@ type Props = {
     setLevelCheck: (levelName: string) => void
 }
 
-class ASVSListFilter extends React.Component<any, Props> {
-
-    render() {
-        return <>
-            <div className="checkboxCollections">
-                {this.props.chapters
+const ASVSListFilter: React.FC<Props> = ({ chapters, setChapterCheck, setLevelCheck }) => {
+    return (
+        <>
+            <div className="flex justify-between mt-4">
+                {chapters
                     .reduce((p: any, c: ASVSChapter, i: number) => {
                         const index = i % 4;
                         if (p.length === 0 || !p[index]) p.push([]);
@@ -21,20 +19,19 @@ class ASVSListFilter extends React.Component<any, Props> {
                         return p;
                     }, [])
                     .map((col: [], colIndex: number) => {
-                        return <div key={`col- ${colIndex.toString()}`}>
+                        return <div key={`col-${colIndex.toString()}`}>
 
                             {col.map((element: ASVSChapter, rowIndex: number) => {
                                 const checkboxId = `checkbox-${colIndex}-${rowIndex}`;
                                 return <div key={rowIndex.toString()}>
 
                                     <input
-
                                         type="checkbox"
                                         id={checkboxId.toString()}
                                         name={element.name}
                                         value={element.checked ? 'checked' : ''}
                                         onChange={(e) => {
-                                            this.props.setChapterCheck(element.name)
+                                            setChapterCheck(element.name)
                                         }}
                                     />
                                     <label htmlFor={checkboxId.toString()}>
@@ -56,7 +53,7 @@ class ASVSListFilter extends React.Component<any, Props> {
                             name="level-1"
                             value=''
                             onChange={(e) => {
-                                this.props.setLevelCheck("level1")
+                                setLevelCheck("level1")
                             }}
                         />
                         <label htmlFor="level-1-checkbox">
@@ -70,7 +67,7 @@ class ASVSListFilter extends React.Component<any, Props> {
                             name="level-2"
                             value=''
                             onChange={(e) => {
-                                this.props.setLevelCheck("level2")
+                                setLevelCheck("level2")
                             }}
                         />
                         <label htmlFor="level-2-checkbox">
@@ -84,7 +81,7 @@ class ASVSListFilter extends React.Component<any, Props> {
                             name="level-3"
                             value=''
                             onChange={(e) => {
-                                this.props.setLevelCheck("level3")
+                                setLevelCheck("level3")
                             }}
                         />
                         <label htmlFor="level-3-checkbox">
@@ -95,8 +92,7 @@ class ASVSListFilter extends React.Component<any, Props> {
             </div>
 
         </>
-
-    }
+    );
 }
 
 export default ASVSListFilter;
