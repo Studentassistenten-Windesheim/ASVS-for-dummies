@@ -32,3 +32,4 @@ describe("Filter items", () => {
         cy.get("[data-cy=asvs-list-item].true").should("have.length.gt", 0);
     });
 });
+

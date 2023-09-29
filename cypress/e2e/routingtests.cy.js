@@ -24,3 +24,11 @@ describe('Visit home page', () => {
         cy.url().should('include', '/');
     });
 });
+
+describe('Visit unknown page', () => {
+    it('visits a non-existent page', () => {
+        cy.visit("localhost:5173/null");
+
+        cy.contains("h1", "Oops!").should("exist");
+    });
+});

@@ -10,7 +10,10 @@
     "start": "vite",
     "build": "vite build",
     "serve": "vite preview",
-    "cypress:open": "cypress open"
+    "cypress:open": "cypress open",
+    "cypress:run": "node ./node_modules/cypress/bin/cypress run",
+    "test": "concurrently \"npm run start\" \"npm run cypress:run\"",
+    "showtests": "concurrently \"npm run start\" \"npm run cypress:open\""
   },
   "eslintConfig": {
     "extends": [
@@ -25,6 +28,7 @@
     "@types/react-dom": "^18.0.11",
     "@vitejs/plugin-react": "^4.0.4",
     "autoprefixer": "^10.4.15",
+    "concurrently": "^8.2.1",
     "cypress": "^13.2.0",
     "postcss": "^8.4.29",
     "react": "^18.2.0",
