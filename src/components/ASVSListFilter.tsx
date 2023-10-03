@@ -29,7 +29,7 @@ const ASVSListFilter: React.FC<Props> = ({ chapters, setChapterCheck, setLevelCh
                                         type="checkbox"
                                         id={checkboxId.toString()}
                                         name={element.name}
-                                        value={element.checked ? 'checked' : ''}
+                                        checked={element.checked}
                                         onChange={(e) => {
                                             setChapterCheck(element.name)
                                         }}

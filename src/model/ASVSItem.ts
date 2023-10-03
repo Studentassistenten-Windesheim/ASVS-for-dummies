@@ -12,7 +12,8 @@ interface ASVSItem{
     "cwe": string,
     "nist": string,
     "quick_reference":string,
-    "show": boolean
+    "show": boolean,
+    "completed": boolean
 }
 
 export default ASVSItem;

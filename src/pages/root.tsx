@@ -18,6 +18,7 @@ const Root = () => {
     useEffect(() => {
         const fetchData = async () => {
             const items = await asvsListItemsAPI();
+
             const chapters: ASVSChapter[] =
                 Array.from(items.reduce((p: any, c: ASVSItem) => {
                     p.add(c.chapter_name);
@@ -82,6 +83,16 @@ const Root = () => {
     }, [chapters, levels, asvsItems]);
 
 
+    function setItemStatus(itemId: string, completed: boolean): void {
+        // Find the item that was clicked
+        const asvsItem = asvsItems.find((item: ASVSItem) => item.req_id == itemId);
+        if (asvsItem) {
+            console.log("found");
+            asvsItem.completed = completed;
+        }
+        localStorage.setItem(itemId, JSON.stringify(completed));
+    }
+
     return (
         <>
             <h1>ASVS for Dummies <small>(ASVS 4.0)</small></h1>
@@ -89,7 +100,7 @@ const Root = () => {
                 chapters={chapters}
                 setChapterCheck={(c: string) => setChapterCheck(c)}
                 setLevelCheck={(c: string) => setLevelCheck(c)} />
-            <ASVSList items={filteredASVSItems()}></ASVSList>
+            <ASVSList items={filteredASVSItems()} setItemStatus={(i: string, c: boolean) => setItemStatus(i, c)}></ASVSList>
         </>
     );
 
