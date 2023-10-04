@@ -36,7 +36,7 @@ const ASVSList: React.FC<Props> = ({ items, setItemStatus }) => {
                                         setItemStatus(item.req_id, e.target.checked)
                                     }}
                                 />
-                                <label htmlFor={item.req_id}>Complete</label>
+                                <label htmlFor={item.req_id} className={`${item.completed ? "text-lime-600" : ""}`}>{item.completed ? "DONE" : "TODO"}</label>
                             </td>
                             <td>
                                 {item.chapter_id} {item.chapter_name} <br/>

@@ -87,10 +87,11 @@ const Root = () => {
         // Find the item that was clicked
         const asvsItem = asvsItems.find((item: ASVSItem) => item.req_id == itemId);
         if (asvsItem) {
-            console.log("found");
             asvsItem.completed = completed;
         }
         localStorage.setItem(itemId, JSON.stringify(completed));
+        // Force a new array to be created so that React will re-render the component
+        setAsvsItems([...asvsItems]);
     }
 
     return (
