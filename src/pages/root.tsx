@@ -4,6 +4,8 @@ import ASVSListFilter from "../components/ASVSListFilter";
 import ASVSChapter from "../model/ASVSChapter";
 import ASVSItem from "../model/ASVSItem";
 import { asvsListItemsAPI } from "../api/ASVSApi";
+import { debug } from "util";
+import { isModuleNamespaceObject } from "util/types";
 
 
 const Root = () => {
@@ -14,6 +16,7 @@ const Root = () => {
         level2: false,
         level3: false
     });
+    const [showIncompleteOnly, setShowIncompleteOnly] = useState<boolean>();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -79,7 +82,12 @@ const Root = () => {
                 i.show = false;
             }
             return i;
-        });
+        }).map((i: ASVSItem) => {
+                if (showIncompleteOnly && i.completed) {
+                i.show = false;
+            }
+            return i;
+            });
     }, [chapters, levels, asvsItems]);
 
 
@@ -94,13 +102,21 @@ const Root = () => {
         setAsvsItems([...asvsItems]);
     }
 
+    function toggleShowIncompleteOnly(c: boolean): void {
+        setShowIncompleteOnly(c);
+        // Force a new array to be created so that React will re-render the component
+        setAsvsItems([...asvsItems]);
+    }
+
     return (
         <>
             <h1>ASVS for Dummies <small>(ASVS 4.0)</small></h1>
             <ASVSListFilter
                 chapters={chapters}
                 setChapterCheck={(c: string) => setChapterCheck(c)}
-                setLevelCheck={(c: string) => setLevelCheck(c)} />
+                setLevelCheck={(c: string) => setLevelCheck(c)}
+                toggleShowIncompleteOnly={(c: boolean) => toggleShowIncompleteOnly(c)}
+            />
             <ASVSList items={filteredASVSItems()} setItemStatus={(i: string, c: boolean) => setItemStatus(i, c)}></ASVSList>
         </>
     );
