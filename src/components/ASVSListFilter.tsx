@@ -5,9 +5,10 @@ type Props = {
     chapters: ASVSChapter[],
     setChapterCheck: (chapterName: string) => void
     setLevelCheck: (levelName: string) => void
+    toggleShowIncompleteOnly: (show: boolean) => void
 }
 
-const ASVSListFilter: React.FC<Props> = ({ chapters, setChapterCheck, setLevelCheck }) => {
+const ASVSListFilter: React.FC<Props> = ({ chapters, setChapterCheck, setLevelCheck, toggleShowIncompleteOnly }) => {
     return (
         <>
             <div className="flex justify-between mt-4">
@@ -29,7 +30,7 @@ const ASVSListFilter: React.FC<Props> = ({ chapters, setChapterCheck, setLevelCh
                                         type="checkbox"
                                         id={checkboxId.toString()}
                                         name={element.name}
-                                        value={element.checked ? 'checked' : ''}
+                                        checked={element.checked}
                                         onChange={(e) => {
                                             setChapterCheck(element.name)
                                         }}
@@ -93,6 +94,22 @@ const ASVSListFilter: React.FC<Props> = ({ chapters, setChapterCheck, setLevelCh
                         </label>
                     </div>
                 </div>
+
+                <div key="show-incomplete-only">
+                    <input
+                        type="checkbox"
+                        id="show-incomplete-only"
+                        name="Show incomplete only"
+                        value=''
+                        onChange={(e) => {
+                            toggleShowIncompleteOnly(e.target.checked)
+                        }}
+                    />
+                    <label htmlFor="show-incomplete-only">
+                        Show incomplete only
+                    </label>
+                </div>
+
             </div>
 
         </>

@@ -4,6 +4,8 @@ import ASVSListFilter from "../components/ASVSListFilter";
 import ASVSChapter from "../model/ASVSChapter";
 import ASVSItem from "../model/ASVSItem";
 import { asvsListItemsAPI } from "../api/ASVSApi";
+import { debug } from "util";
+import { isModuleNamespaceObject } from "util/types";
 
 
 const Root = () => {
@@ -14,10 +16,12 @@ const Root = () => {
         level2: false,
         level3: false
     });
+    const [showIncompleteOnly, setShowIncompleteOnly] = useState<boolean>();
 
     useEffect(() => {
         const fetchData = async () => {
             const items = await asvsListItemsAPI();
+
             const chapters: ASVSChapter[] =
                 Array.from(items.reduce((p: any, c: ASVSItem) => {
                     p.add(c.chapter_name);
@@ -78,9 +82,31 @@ const Root = () => {
                 i.show = false;
             }
             return i;
-        });
+        }).map((i: ASVSItem) => {
+                if (showIncompleteOnly && i.completed) {
+                i.show = false;
+            }
+            return i;
+            });
     }, [chapters, levels, asvsItems]);
 
+
+    function setItemStatus(itemId: string, completed: boolean): void {
+        // Find the item that was clicked
+        const asvsItem = asvsItems.find((item: ASVSItem) => item.req_id == itemId);
+        if (asvsItem) {
+            asvsItem.completed = completed;
+        }
+        localStorage.setItem(itemId, JSON.stringify(completed));
+        // Force a new array to be created so that React will re-render the component
+        setAsvsItems([...asvsItems]);
+    }
+
+    function toggleShowIncompleteOnly(c: boolean): void {
+        setShowIncompleteOnly(c);
+        // Force a new array to be created so that React will re-render the component
+        setAsvsItems([...asvsItems]);
+    }
 
     return (
         <>
@@ -88,8 +114,10 @@ const Root = () => {
             <ASVSListFilter
                 chapters={chapters}
                 setChapterCheck={(c: string) => setChapterCheck(c)}
-                setLevelCheck={(c: string) => setLevelCheck(c)} />
-            <ASVSList items={filteredASVSItems()}></ASVSList>
+                setLevelCheck={(c: string) => setLevelCheck(c)}
+                toggleShowIncompleteOnly={(c: boolean) => toggleShowIncompleteOnly(c)}
+            />
+            <ASVSList items={filteredASVSItems()} setItemStatus={(i: string, c: boolean) => setItemStatus(i, c)}></ASVSList>
         </>
     );
 

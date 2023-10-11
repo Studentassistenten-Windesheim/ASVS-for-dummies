@@ -3,9 +3,10 @@ import React from "react";
 
 type Props = {
     items: ASVSItem[]
+    setItemStatus: (itemId: string, completed: boolean) => void
 }
 
-const ASVSList: React.FC<Props> = ({ items }) => {
+const ASVSList: React.FC<Props> = ({ items, setItemStatus }) => {
     const filteredItems = items.filter((i: ASVSItem) => i.show);
 
     return (
@@ -15,6 +16,7 @@ const ASVSList: React.FC<Props> = ({ items }) => {
             <table className='border-separate border-spacing-2'>
                 <thead>
                     <tr className='text-left'>
+                        <th>Status</th>
                         <th>Chapter, Section & Id</th>
                         <th className='w-2/5'>Requirement</th>
                         <th className='w-[30%]'>Quick reference guide chapter</th>
@@ -26,11 +28,23 @@ const ASVSList: React.FC<Props> = ({ items }) => {
                             className={`${item.show} ${!item.show ? "hidden" : ""}`}
                             data-cy="asvs-list-item"                        >
                             <td>
-                                {item.chapter_id} {item.chapter_name} <br />
-                                {item.section_id} {item.section_name} <br />
-                                Level 1 {item.level1} <br />
-                                Level 2 {item.level2} <br />
-                                Level 3 {item.level3}
+
+                                <input
+                                    type="checkbox"
+                                    id={item.req_id}
+                                    checked={item.completed}
+                                    onChange={(e) => {
+                                        setItemStatus(item.req_id, e.target.checked);
+                                    }}
+                                />
+                                <label htmlFor={item.req_id} className={`${item.completed ? "text-lime-600" : ""}`}>{item.completed ? "DONE" : "TODO"}</label>
+                            </td>
+                            <td>
+                                {item.chapter_id} {item.chapter_name} <br/>
+                                {item.section_id} {item.section_name} <br/>
+                                Level 1 {item.level1} <br/>
+                                Level 2 {item.level2} <br/>
+                                Level 3 {item.level3} 
                             </td>
                             <td>
                                 {item.req_id} &nbsp;
