@@ -25,7 +25,8 @@ const ASVSList: React.FC<Props> = ({ items, setItemStatus }) => {
                 <tbody className='align-text-top'>
                     {items.map((item: ASVSItem, index: number) => (
                         <tr key={`item-${index.toString()}`}
-                            className={`${item.show} ${!item.show ? "hidden" : ""}`}>
+                            className={`${item.show} ${!item.show ? "hidden" : ""}`}
+                            data-cy="asvs-list-item"                        >
                             <td>
 
                                 <input
@@ -45,9 +46,9 @@ const ASVSList: React.FC<Props> = ({ items, setItemStatus }) => {
                                 Level 2 {item.level2} <br/>
                                 Level 3 {item.level3} 
                             </td>
-                            <td> 
+                            <td>
                                 {item.req_id} &nbsp;
-                                    {item.req_description}
+                                {item.req_description}
                             </td>
                             <td>
                                 {item.quick_reference}

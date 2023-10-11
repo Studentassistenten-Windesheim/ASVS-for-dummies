@@ -34,6 +34,7 @@ const ASVSListFilter: React.FC<Props> = ({ chapters, setChapterCheck, setLevelCh
                                         onChange={(e) => {
                                             setChapterCheck(element.name)
                                         }}
+                                        data-cy="chapter-checkbox"
                                     />
                                     <label htmlFor={checkboxId.toString()}>
                                         {element.name}
@@ -56,6 +57,7 @@ const ASVSListFilter: React.FC<Props> = ({ chapters, setChapterCheck, setLevelCh
                             onChange={(e) => {
                                 setLevelCheck("level1")
                             }}
+                            data-cy="level-checkbox"
                         />
                         <label htmlFor="level-1-checkbox">
                             Level 1
@@ -70,6 +72,7 @@ const ASVSListFilter: React.FC<Props> = ({ chapters, setChapterCheck, setLevelCh
                             onChange={(e) => {
                                 setLevelCheck("level2")
                             }}
+                            data-cy="level-checkbox"
                         />
                         <label htmlFor="level-2-checkbox">
                             Level 2
@@ -84,6 +87,7 @@ const ASVSListFilter: React.FC<Props> = ({ chapters, setChapterCheck, setLevelCh
                             onChange={(e) => {
                                 setLevelCheck("level3")
                             }}
+                            data-cy="level-checkbox"
                         />
                         <label htmlFor="level-3-checkbox">
                             Level 3

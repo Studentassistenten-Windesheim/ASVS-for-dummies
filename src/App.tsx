@@ -28,12 +28,16 @@ const App = () => {
             <header className="header sticky top-0 bg-white shadow-md flex items-center justify-between px-8 py-02">
                 <nav className="nav font-semibold text-lg">
                     <ul className="flex items-center">
-                        <li className="p-4 hover:text-blue-500 duration-200 cursor-pointer">
-                            <a href="/">Home</a>
-                        </li>
-                        <li className="p-4 hover:text-blue-500 duration-200 cursor-pointer">
-                            <a href="/tips">Tips</a>
-                        </li>
+                        <a href="/">
+                            <li className="p-4 hover:text-blue-500 duration-200 cursor-pointer">
+                                <p>Home</p>
+                            </li>
+                        </a>
+                        <a href="/tips">
+                            <li className="p-4 hover:text-blue-500 duration-200 cursor-pointer">
+                                <p>Tips</p>
+                            </li>
+                        </a>
                     </ul>
                 </nav>
             </header>
