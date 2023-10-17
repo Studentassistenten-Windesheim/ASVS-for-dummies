@@ -18,6 +18,7 @@ const ASVSSearch: React.FC<Props> = ({ setSearchInputCheck }) => {
           type="text"
           placeholder="Search here"
           onChange={handleChange}
+          data-cy="search-input"
         />
       </div>
     </>

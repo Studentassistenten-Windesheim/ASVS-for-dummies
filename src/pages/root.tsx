@@ -97,6 +97,7 @@ const Root = () => {
       .map((i: ASVSItem) => {
         if (searchInput && i.show) {
           const shouldShow =
+            i.req_id.toLowerCase().includes(searchInput) ||
             i.section_name.toLowerCase().includes(searchInput) ||
             i.req_description.toLowerCase().includes(searchInput) ||
             i.quick_reference.toLowerCase().includes(searchInput);
