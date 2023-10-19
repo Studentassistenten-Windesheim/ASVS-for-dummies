@@ -1,17 +1,17 @@
-import { useCallback, useEffect, useState } from "react";
-import ASVSList from "../components/ASVSList";
-import ASVSListFilter from "../components/ASVSListFilter";
-import ASVSChapter from "../model/ASVSChapter";
-import ASVSItem from "../model/ASVSItem";
-import { asvsListItemsAPI } from "../api/ASVSApi";
-import ASVSSearch from "../components/ASVSSearch";
-import { debug } from "util";
-import { isModuleNamespaceObject } from "util/types";
+import { useCallback, useEffect, useState } from 'react';
+import ASVSList from '../components/ASVSList';
+import ASVSListFilter from '../components/ASVSListFilter';
+import ASVSChapter from '../model/ASVSChapter';
+import ASVSItem from '../model/ASVSItem';
+import { asvsListItemsAPI } from '../api/ASVSApi';
+import ASVSSearch from '../components/ASVSSearch';
+import { debug } from 'util';
+import { isModuleNamespaceObject } from 'util/types';
 
 const Root = () => {
   const [asvsItems, setAsvsItems] = useState<ASVSItem[]>([]);
   const [chapters, setChapters] = useState<ASVSChapter[]>([]);
-  const [searchInput, setSearchInput] = useState("");
+  const [searchInput, setSearchInput] = useState('');
   const [levels, setLevels] = useState<{ [key: string]: boolean }>({
     level1: false,
     level2: false,
@@ -72,9 +72,9 @@ const Root = () => {
         if (levelFilter) {
           let shouldShow = false;
 
-          if (levels.level1 && i.level1 !== "") shouldShow = true;
-          if (levels.level2 && i.level2 !== "") shouldShow = true;
-          if (levels.level3 && i.level3 !== "") shouldShow = true;
+          if (levels.level1 && i.level1 !== '') shouldShow = true;
+          if (levels.level2 && i.level2 !== '') shouldShow = true;
+          if (levels.level3 && i.level3 !== '') shouldShow = true;
           i.show = shouldShow;
         }
         return i;
@@ -98,8 +98,11 @@ const Root = () => {
         if (searchInput && i.show) {
           const shouldShow =
             i.req_id.toLowerCase().includes(searchInput) ||
-            i.section_name.toLowerCase().includes(searchInput) ||
             i.req_description.toLowerCase().includes(searchInput) ||
+            i.section_id.toLowerCase().includes(searchInput) ||
+            i.section_name.toLowerCase().includes(searchInput) ||
+            i.chapter_name.toLowerCase().includes(searchInput) ||
+            i.chapter_id.toLowerCase().includes(searchInput) ||
             i.quick_reference.toLowerCase().includes(searchInput);
           i.show = shouldShow;
         }
@@ -129,9 +132,6 @@ const Root = () => {
       <h1>
         ASVS for Dummies <small>(ASVS 4.0)</small>
       </h1>
-      <ASVSSearch
-        setSearchInputCheck={(c: string) => setSearchInputCheck(c)}
-      ></ASVSSearch>
       <ASVSListFilter
         chapters={chapters}
         setChapterCheck={(c: string) => setChapterCheck(c)}
@@ -141,6 +141,7 @@ const Root = () => {
       <ASVSList
         items={filteredASVSItems()}
         setItemStatus={(i: string, c: boolean) => setItemStatus(i, c)}
+        setSearchInputCheck={(c: string) => setSearchInputCheck(c)}
       ></ASVSList>
     </>
   );
