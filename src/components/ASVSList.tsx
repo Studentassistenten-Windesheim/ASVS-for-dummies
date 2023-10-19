@@ -3,27 +3,31 @@ import React from 'react';
 import ASVSSearch from './ASVSSearch';
 
 type Props = {
-  items: ASVSItem[];
-  setItemStatus: (itemId: string, completed: boolean) => void;
-  setSearchInputCheck: (searchInput: string) => void;
+    items: ASVSItem[];
+    setItemStatus: (itemId: string, completed: boolean) => void;
+    setSearchInputCheck: (searchInput: string) => void;
 };
 
 const ASVSList: React.FC<Props> = ({
-  items,
-  setItemStatus,
-  setSearchInputCheck,
+    items,
+    setItemStatus,
+    setSearchInputCheck,
 }) => {
-  const filteredItems = items.filter((i: ASVSItem) => i.show);
+    const filteredItems = items.filter((i: ASVSItem) => i.show);
 
     return (
         <>
             <div className='flex-grow overflow-auto shadow-md sm:rounded-lg'>
                 <table className='w-full text-sm text-left text-gray-500'>
-                    <caption className='p-5 text-lg font-semibold text-left text-gray-900 bg-gray-50'>
-                        <h2 className='mt-1'>List <small>{filteredItems.length.toString()}</small></h2>
-                        <ASVSSearch
-                            setSearchInputCheck={(c: string) => setSearchInputCheck(c)}
-                        ></ASVSSearch>
+                    <caption className='p-1 text-lg font-semibold text-left text-gray-900 bg-gray-50'>
+                        <div className='flex flex-wrap items-center'>
+                            <h2 className='p-2'>List <small>{filteredItems.length.toString()}</small></h2>
+                            <div className='p-2'>
+                            <ASVSSearch
+                                setSearchInputCheck={(c: string) => setSearchInputCheck(c)}
+                            ></ASVSSearch>
+                            </div>
+                        </div>
                     </caption>
                     <thead className='top-0 px-6 py-3 text-xs text-gray-700 uppercase bg-gray-200'>
                         <tr>
