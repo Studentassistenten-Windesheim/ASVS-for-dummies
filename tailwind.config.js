@@ -4,10 +4,13 @@ module.exports = {
     preflight: true,
   },
   content: [
-    './src/**/*.{ts,tsx,html}',
+      './src/**/*.{ts,tsx,html}',
+      './node_modules/flowbite/**/*.js',
   ],
   theme: {
     extend: {},
   },
-  plugins: [],
+    plugins: [
+        require('flowbite/plugin')
+    ]
 }

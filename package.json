@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@types/node": "^16.18.14"
+    "@types/node": "^16.18.14",
+    "flowbite": "^1.8.1"
   },
   "scripts": {
     "dev": "vite",

@@ -11,11 +11,12 @@ const ASVSList: React.FC<Props> = ({ items, setItemStatus }) => {
 
     return (
         <>
-            <h2 className='mt-6'>List <small>{filteredItems.length.toString()}</small></h2>
-
-            <div className="overflow-x-auto shadow-md sm:rounded-lg">
+            <div className="flex-grow overflow-auto shadow-md sm:rounded-lg">
                 <table className="w-full text-sm text-left text-gray-500 ">
-                    <thead className="text-xs text-gray-700 uppercase bg-gray-50">
+                    <caption className="p-5 text-lg font-semibold text-left text-gray-900 bg-gray-50">
+                        <h2 className='mt-1'>List <small>{filteredItems.length.toString()}</small></h2>
+                    </caption>
+                    <thead className="top-0 px-6 py-3 text-xs text-gray-700 uppercase bg-gray-200">
                         <tr>
                             <th scope="col" className="px-6 py-3">
                                 Status
@@ -31,7 +32,8 @@ const ASVSList: React.FC<Props> = ({ items, setItemStatus }) => {
                             </th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody className="h-96 overflow-y-auto">
+                        {/*Map all items to html*/}
                         {filteredItems.map((item: ASVSItem, index: number) => (
                             <tr key={`item-${index.toString()}`}
                                 className={`${item.show} ${!item.show ? "hidden" : ""} + " odd:bg-white even:bg-gray-50 border-b"`}

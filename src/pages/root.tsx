@@ -83,11 +83,11 @@ const Root = () => {
             }
             return i;
         }).map((i: ASVSItem) => {
-                if (showIncompleteOnly && i.completed) {
+            if (showIncompleteOnly && i.completed) {
                 i.show = false;
             }
             return i;
-            });
+        });
     }, [chapters, levels, asvsItems]);
 
 
@@ -111,12 +111,14 @@ const Root = () => {
     return (
         <>
             <h1>ASVS for Dummies <small>(ASVS 4.0)</small></h1>
+
             <ASVSListFilter
                 chapters={chapters}
                 setChapterCheck={(c: string) => setChapterCheck(c)}
                 setLevelCheck={(c: string) => setLevelCheck(c)}
                 toggleShowIncompleteOnly={(c: boolean) => toggleShowIncompleteOnly(c)}
             />
+
             <ASVSList items={filteredASVSItems()} setItemStatus={(i: string, c: boolean) => setItemStatus(i, c)}></ASVSList>
         </>
     );
