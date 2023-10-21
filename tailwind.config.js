@@ -1,16 +1,16 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  corePlugins: {
-    preflight: true,
-  },
-  content: [
-      './src/**/*.{ts,tsx,html}',
-      './node_modules/flowbite/**/*.js',
-  ],
-  theme: {
-    extend: {},
-  },
-    plugins: [
-        require('flowbite/plugin')
-    ]
+
+    plugins: [require('flowbite/plugin')],
+    corePlugins: {
+        preflight: true,
+    },
+    content: [
+        './src/**/*.{ts,tsx,html,cy.js}',
+        './node_modules/flowbite/**/*.js',
+    ],
+
+    theme: {
+        extend: {},
+    }
 }

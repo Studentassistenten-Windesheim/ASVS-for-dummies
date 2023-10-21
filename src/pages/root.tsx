@@ -142,7 +142,7 @@ const Root = () => {
         items={filteredASVSItems()}
         setItemStatus={(i: string, c: boolean) => setItemStatus(i, c)}
         setSearchInputCheck={(c: string) => setSearchInputCheck(c)}
-      ></ASVSList>
+          ></ASVSList>
     </>
   );
 };

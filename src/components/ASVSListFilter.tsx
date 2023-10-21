@@ -15,7 +15,8 @@ const ASVSListFilter: React.FC<Props> = ({ chapters, setChapterCheck, setLevelCh
             <div id='accordion-collapse' data-accordion='collapse' className='py-2'>
 
                 {/*Collapse button*/}
-                <button type='button' id='collapse-heading' className='flex items-center justify-between w-full p-2 font-medium text-left text-gray-500 border border-gray-200' data-accordion-target='#accordion-collapse-body-2' aria-expanded='false' aria-controls='accordion-collapse-body-2'>
+                <button type='button' id='collapse-heading' data-cy='filter-accordion' className='flex items-center justify-between w-full p-2 font-medium text-left text-gray-500 border border-gray-200'
+                    data-accordion-target='#accordion-collapse-body-2' aria-expanded='false' aria-controls='accordion-collapse-body-2'>
                     <h3>Filters</h3>
                     <svg data-accordion-icon className='w-3 h-3 rotate-180' aria-hidden='true' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 10 6'>
                         <path stroke='currentColor' strokeLinecap='round' strokeLinejoin='round' strokeWidth='2' d='M9 5 5 1 1 5' />
