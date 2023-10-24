@@ -80,18 +80,19 @@ const ASVSList: React.FC<Props> = ({
                 {item.req_id} &nbsp;
                 {item.req_description}
               </td>
-              <td className='relative pr-4'>
+              <td className='relative pr-8'>
                 {item.quick_reference}
                 <FontAwesomeIcon
                   className={`absolute top-0 right-0 h-5 w-5 transition duration-300 ease-in-out ${
                     isPinned(item.req_id)
                       ? 'text-[#db0a0a] rotate-45 hover:rotate-0 hover:text-[#9e9e9e]'
                       : 'text-[#9e9e9e] hover:rotate-45 hover:text-[#db0a0a]'
-                  }`} //hover:rotate-45 transition duration-300 ease-in-out`}
+                  }`}
                   icon={faThumbtack}
                   onClick={() => {
                     setPinStatus(item.req_id);
                   }}
+                  data-cy='asvs-list-pin'
                 />
               </td>
             </tr>

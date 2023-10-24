@@ -34,6 +34,8 @@ describe('Filter items', () => {
     cy.get('[data-cy=chapter-checkbox]').first().uncheck();
     cy.get('[data-cy=asvs-list-item].true').should('have.length.gt', 0);
   });
+
+  //Search bar tests
   it('should show ASVS items when search input is empty', () => {
     cy.get('[data-cy=search-input]').clear();
     cy.get('[data-cy=asvs-list-item].true').should('have.length.gt', 0);

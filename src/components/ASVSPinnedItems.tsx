@@ -34,7 +34,7 @@ const ASVSPinnedItems: React.FC<Props> = ({
         </thead>
         <tbody className='align-text-top'>
           {items.map((item: ASVSItem, index: number) => (
-            <tr key={`item-${index.toString()}`}>
+            <tr key={`item-${index.toString()}`} data-cy='asvs-pinned-item'>
               <td>
                 <input
                   type='checkbox'
@@ -50,7 +50,7 @@ const ASVSPinnedItems: React.FC<Props> = ({
                   {item.completed ? 'DONE' : 'TODO'}
                 </label>
               </td>
-              <td className='relative pr-4'>
+              <td className='relative pr-8'>
                 {item.req_id} &nbsp;
                 {item.req_description}
                 <FontAwesomeIcon
@@ -59,6 +59,7 @@ const ASVSPinnedItems: React.FC<Props> = ({
                   onClick={() => {
                     setPinStatus(item.req_id);
                   }}
+                  data-cy='asvs-pin'
                 />
               </td>
             </tr>
