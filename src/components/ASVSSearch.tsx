@@ -31,7 +31,7 @@ const ASVSSearch: React.FC<Props> = ({ setSearchInputCheck }) => {
         <input
           id='search-bar'
           ref={searchInputRef}
-          className='w-50% sm:w-48 h-8 p-2 mt-8 ml-4 mb-1 border rounded-lg mb-4 focus:outline-none focus:border-gray-500 focus:ring-gray-200 hover:border-gray-300 shadow-sm'
+          className='w-50% sm:w-48 h-8 p-2 border rounded-lg focus:outline-none focus:border-gray-500 focus:ring-gray-200 hover:border-gray-300 shadow-sm'
           type='text'
           placeholder='Press / to search'
           onChange={handleChange}
