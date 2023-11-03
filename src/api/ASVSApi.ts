@@ -25,7 +25,7 @@ export const chapterToQuickReferenceMap : any = {
 export const asvsListItemsAPI = async ()=>{
     return items.map((i:any) => {
         i.show = true;
-        // debugger
+        i.completed = localStorage.getItem(i.req_id) == "true";
         i.quick_reference = chapterToQuickReferenceMap[i.chapter_name]?.toString() || 'No reference available'
         return i;
     })
