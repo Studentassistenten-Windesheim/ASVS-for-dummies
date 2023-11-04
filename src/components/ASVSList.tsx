@@ -51,24 +51,21 @@ const ASVSList: React.FC<Props> = ({
                         <div className='flex flex-wrap items-center'>
                             <h2 className='p-2'>List <small>{filteredItems.length.toString()}</small></h2>
                             <div className='p-2'>
-                            <ASVSSearch
-                                setSearchInputCheck={(c: string) => setSearchInputCheck(c)}
-                            ></ASVSSearch>
+                                <ASVSSearch
+                                    setSearchInputCheck={(c: string) => setSearchInputCheck(c)}
+                                ></ASVSSearch>
                             </div>
                         </div>
                     </caption>
-                    <thead className='top-0 px-6 py-3 text-xs text-gray-700 uppercase bg-gray-200'>
+                    <thead className='text-xs text-gray-700 uppercase bg-gray-200'>
                         <tr>
-                            <th scope='col' className='px-6 py-3'>
-                                Status
-                            </th>
-                            <th scope='col' className='px-6 py-3'>
+                            <th scope='col' className='p-3'>
                                 Chapter, Section & Id
                             </th>
-                            <th scope='col' className='px-6 py-3'>
+                            <th scope='col' className='p-3'>
                                 Requirement
                             </th>
-                            <th scope='col' className='px-6 py-3'>
+                            <th scope='col' className='p-3'>
                                 Quick reference guide chapter
                             </th>
                         </tr>
@@ -79,37 +76,34 @@ const ASVSList: React.FC<Props> = ({
                             <tr key={`item-${index.toString()}`}
                                 className={`${item.show} ${!item.show ? 'hidden' : ''} + " odd:bg-white even:bg-gray-50 border-b"`}
                                 data-cy='asvs-list-item'>
-                                <td className='w-4 p-4'>
-                                    <div className="flex items-center">
-                                        <input
-                                            className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded"
-                                            type="checkbox"
-                                            id={item.req_id}
-                                            value=""
-                                            checked={item.completed}
-                                            onChange={(e) => {
-                                                setItemStatus(item.req_id, e.target.checked);
-                                            }}
+                                <td className='p-3'>
+                                    <div className="flex items-center flex-wrap">
+                                        <label htmlFor={item.req_id}>
+                                            <input
+                                                className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded"
+                                                type="checkbox"
+                                                id={item.req_id}
+                                                value=""
+                                                checked={item.completed}
+                                                onChange={(e) => {
+                                                    setItemStatus(item.req_id, e.target.checked);
+                                                }}
                                             />
-                                        <label htmlFor={item.req_id} className="sr-only">checkbox</label>
+                                            <span className="font-bold"> {item.section_id} </span> {item.chapter_name} - {item.section_name}
+                                        </label>
+
+                                        {item.level1 != "" && <span className='bg-green-200 text-green-900 text-xs font-medium m-1 px-1.5 py-0.5 rounded'>Level 1</span>}
+                                        {item.level2 != "" && <span className='bg-yellow-200 text-yellow-900 text-xs font-medium m-1 px-1.5 py-0.5 rounded'>Level 2</span>}
+                                        {item.level3 != "" && <span className='bg-red-200 text-red-900 text-xs font-medium m-1 px-1.5 py-0.5 rounded'>Level 3</span>}
                                     </div>
                                 </td>
-                                <td className="px-6 py-4">
-                                    {item.chapter_id} {item.chapter_name} <br />
-                                    {item.section_id} {item.section_name} <br />
-                                    <div className="flex flex-wrap">
-                                        {item.level1.startsWith("✓") && <span className='bg-green-200 text-green-900 text-xs font-medium m-1 px-1.5 py-0.5 rounded'>Level 1</span>}
-                                        {item.level2.startsWith("✓") && <span className='bg-yellow-200 text-yellow-900 text-xs font-medium m-1 px-1.5 py-0.5 rounded'>Level 2</span>}
-                                        {item.level3.startsWith("✓") && <span className='bg-red-200 text-red-900 text-xs font-medium m-1 px-1.5 py-0.5 rounded'>Level 3</span>}
-                                    </div>
-                                </td>
-                                <td className="px-6 py-4">
-                                    {item.req_id} &nbsp;
+                                <td className="p-3">
+                                    <span className="font-bold">{item.req_id} </span>
                                     <DetectLink>
                                         {item.req_description}
                                     </DetectLink>
                                 </td>
-                                <td className="px-6 py-4">
+                                <td className="p-3">
                                     {item.quick_reference}
                                 </td>
                             </tr>
