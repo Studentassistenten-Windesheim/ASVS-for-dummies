@@ -129,7 +129,7 @@ const Root = () => {
 
     return (
         <>
-            <div className="container flex">
+            <div className="container flex flex-row">
 
                 <ASVSListFilter
                     chapters={chapters}
@@ -138,7 +138,7 @@ const Root = () => {
                     toggleShowIncompleteOnly={(c: boolean) => toggleShowIncompleteOnly(c)}
                 />
 
-                <main className="w-5/6 p-1">
+                <main className="translate-x-[22%] w-5/6 p-1">
                     <h1 className="py-2">
                         ASVS for Dummies <small>(ASVS 4.0)</small>
                     </h1>

@@ -10,7 +10,7 @@ const ASVSChapterFilterItem: React.FC<Props> = ({ name, checked, toggleFunction 
     return (
         <>
             <li>
-                <div key={name} className='pl-3'>
+                <div className='pl-3'>
                     <input
                         type='checkbox'
                         id={name}

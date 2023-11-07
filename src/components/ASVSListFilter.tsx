@@ -12,7 +12,7 @@ type Props = {
 const ASVSListFilter: React.FC<Props> = ({ chapters, setChapterCheck, setLevelCheck, toggleShowIncompleteOnly }) => {
     return (
         <>
-            <aside className="w-1/6 p-1">
+            <aside className="fixed p-1 w-1/6">
                 <div className="rounded h-full px-2 py-2 bg-gray-50 font-normal">
 
                     {/*Show complete/incomplete only*/}
@@ -127,9 +127,9 @@ const ASVSListFilter: React.FC<Props> = ({ chapters, setChapterCheck, setLevelCh
                         <li>
                             <p className="font-bold">Chapters</p>
                         </li>
-                            {chapters.map((chapter: ASVSChapter) => (
-                                <ASVSChapterFilterItem name={chapter.name} checked={chapter.checked} toggleFunction={setChapterCheck} ></ASVSChapterFilterItem>
-                            ))
+                        {chapters.map((chapter: ASVSChapter) => (
+                            <ASVSChapterFilterItem key={chapter.name} name={chapter.name} checked={chapter.checked} toggleFunction={setChapterCheck} ></ASVSChapterFilterItem>
+                        ))
                         }
                     </ul>
 

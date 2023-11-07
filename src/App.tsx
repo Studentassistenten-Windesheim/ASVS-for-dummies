@@ -25,7 +25,7 @@ const App = () => {
 
     return (
         <>
-            <header className="header sticky top-0 bg-white shadow-md flex items-center justify-between px-8 py-02">
+            <header className="header sticky top-0 bg-white shadow-md flex items-center justify-between z-10 px-8 py-02">
                 <nav className="nav font-semibold text-lg">
                     <ul className="flex items-center">
                         <a href="/">
