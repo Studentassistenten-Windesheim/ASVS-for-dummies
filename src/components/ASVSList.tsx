@@ -110,7 +110,10 @@ const ASVSList: React.FC<Props> = ({
                                     </DetectLink>
                                 </td>
                                 <td className="px-6 py-4">
-                                    {item.quick_reference}
+                                    {item.quick_reference} <br/>
+                                    {item.cwe != "" && <a href={'https://cwe.mitre.org/data/definitions/' + item.cwe + '.html'} target="_blank" rel="noreferrer" className="font-medium text-blue-600 hover:underline">
+                                        CWE:{item.cwe}
+                                    </a>}
                                 </td>
                             </tr>
                         ))}
