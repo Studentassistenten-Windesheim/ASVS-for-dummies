@@ -10,6 +10,7 @@ import { isModuleNamespaceObject } from 'util/types';
 import ASVSPinnedItems from '../components/ASVSPinnedItems';
 
 const Root = () => {
+  let AllAsvsItems: ASVSItem[];
   const [asvsItems, setAsvsItems] = useState<ASVSItem[]>([]);
   const [chapters, setChapters] = useState<ASVSChapter[]>([]);
   const [searchInput, setSearchInput] = useState('');
@@ -37,6 +38,7 @@ const Root = () => {
       ).map((c: any) => {
         return new ASVSChapter(c);
       });
+      AllAsvsItems = items;
       setPinnedItems(pinnedItems);
       setAsvsItems(items);
       setChapters(chapters);
@@ -135,7 +137,9 @@ const Root = () => {
   }
 
   function setPinStatus(itemId: string): void {
-    const asvsItem = asvsItems.find((item: ASVSItem) => item.req_id === itemId);
+    const asvsItem = AllAsvsItems.find(
+      (item: ASVSItem) => item.req_id === itemId
+    );
     if (asvsItem) {
       setPinnedItems((prevPinnedItems) => {
         const isPinned = prevPinnedItems.some(
