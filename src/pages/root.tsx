@@ -17,7 +17,7 @@ const Root = () => {
         level2: false,
         level3: false,
     });
-    const [showIncompleteOnly, setShowIncompleteOnly] = useState<boolean>();
+    const [showIncompleteOnly, setShowIncompleteOnly] = useState<string>();
     useEffect(() => {
         const fetchData = async () => {
             const items = await asvsListItemsAPI();
@@ -89,7 +89,10 @@ const Root = () => {
                 return i;
             })
             .map((i: ASVSItem) => {
-                if (showIncompleteOnly && i.completed) {
+                if (showIncompleteOnly == "incomplete" && i.completed) {
+                    i.show = false;
+                }
+                if (showIncompleteOnly == "complete" && !i.completed) {
                     i.show = false;
                 }
                 return i;
@@ -121,7 +124,7 @@ const Root = () => {
         setAsvsItems([...asvsItems]);
     }
 
-    function toggleShowIncompleteOnly(c: boolean): void {
+    function toggleShowIncompleteOnly(c: string): void {
         setShowIncompleteOnly(c);
         // Force a new array to be created so that React will re-render the component
         setAsvsItems([...asvsItems]);
@@ -135,7 +138,7 @@ const Root = () => {
                     chapters={chapters}
                     setChapterCheck={(c: string) => setChapterCheck(c)}
                     setLevelCheck={(c: string) => setLevelCheck(c)}
-                    toggleShowIncompleteOnly={(c: boolean) => toggleShowIncompleteOnly(c)}
+                    toggleShowIncompleteOnly={(c: string) => toggleShowIncompleteOnly(c)}
                 />
 
                 <main className="translate-x-[22%] w-5/6 p-1">

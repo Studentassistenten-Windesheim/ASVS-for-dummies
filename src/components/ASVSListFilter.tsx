@@ -6,7 +6,7 @@ type Props = {
     chapters: ASVSChapter[],
     setChapterCheck: (chapterName: string) => void
     setLevelCheck: (levelName: string) => void
-    toggleShowIncompleteOnly: (show: boolean) => void
+    toggleShowIncompleteOnly: (show: string) => void
 }
 
 const ASVSListFilter: React.FC<Props> = ({ chapters, setChapterCheck, setLevelCheck, toggleShowIncompleteOnly }) => {
@@ -16,47 +16,79 @@ const ASVSListFilter: React.FC<Props> = ({ chapters, setChapterCheck, setLevelCh
                 <div className="rounded h-full px-2 py-2 bg-gray-50 font-normal">
 
                     {/*Show complete/incomplete only*/}
-                    <ul>
+                    <p className="font-bold">Completed</p>
+                    <ul className="flex flex-wrap w-full gap-1">
                         <li>
-                            <p className="font-bold">Completed</p>
+                            <input type="radio" id="filter-incomplete" name="filter-complete" value="incomplete" className="hidden peer"
+                                onChange={(e) => {
+                                    toggleShowIncompleteOnly("incomplete");
+                                }}/>
+                            <label htmlFor="filter-incomplete" className="inline-flex items-center justify-between w-full p-1 text-gray-900 bg-white border border-gray-200 rounded-lg cursor-pointer peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100">
+                                Incomplete
+                            </label>
                         </li>
                         <li>
-                            <div key='show-complete-only' className='pl-3'>
-
-                                {/*TODO: Create function to show completed only*/}
-
-                                <input
-                                    type='checkbox'
-                                    id='show-complete-only'
-                                    className='text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2'
-                                    name='Show complete only'
-                                    value=''
-                                    onChange={(e) => {
-                                        toggleShowIncompleteOnly(e.target.checked)
-                                    }}
-                                />
-                                <label htmlFor='show-complete-only' className='w-full py-2 ml-1 text-sm text-gray-900'>
-                                    Show Complete only
-                                </label>
-                            </div>
-
-                            <div key='show-incomplete-only' className='pl-3'>
-                                <input
-                                    type='checkbox'
-                                    id='show-incomplete-only'
-                                    className='text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2'
-                                    name='Show incomplete only'
-                                    value=''
-                                    onChange={(e) => {
-                                        toggleShowIncompleteOnly(e.target.checked)
-                                    }}
-                                />
-                                <label htmlFor='show-incomplete-only' className='w-full py-2 ml-1 text-sm text-gray-900'>
-                                    Show incomplete only
-                                </label>
-                            </div>
+                            <input type="radio" id="filter-all" name="filter-complete" value="all" className="hidden peer" defaultChecked
+                                onChange={(e) => {
+                                    toggleShowIncompleteOnly("all");
+                                }}/>
+                            <label htmlFor="filter-all" className="inline-flex w-full p-1 text-gray-900 bg-white border border-gray-200 rounded-lg cursor-pointer peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100">
+                                All
+                            </label>
+                        </li>
+                        <li>
+                            <input type="radio" id="filter-complete" name="filter-complete" value="complete" className="hidden peer"
+                                onChange={(e) => {
+                                    toggleShowIncompleteOnly("complete");
+                                }} />
+                            <label htmlFor="filter-complete" className="inline-flex w-full p-1 text-gray-900 bg-white border border-gray-200 rounded-lg cursor-pointer peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100">
+                                Complete
+                            </label>
                         </li>
                     </ul>
+
+
+                    {/*<ul>*/}
+                    {/*    <li>*/}
+                    {/*        <p className="font-bold">Completed</p>*/}
+                    {/*    </li>*/}
+                    {/*    <li>*/}
+                    {/*        <div key='show-complete-only' className='pl-3'>*/}
+
+                    {/*            */}{/*TODO: Create function to show completed only*/}
+
+                    {/*            <input*/}
+                    {/*                type='checkbox'*/}
+                    {/*                id='show-complete-only'*/}
+                    {/*                className='text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2'*/}
+                    {/*                name='Show complete only'*/}
+                    {/*                value=''*/}
+                    {/*                onChange={(e) => {*/}
+                    {/*                    toggleShowIncompleteOnly(e.target.checked)*/}
+                    {/*                }}*/}
+                    {/*            />*/}
+                    {/*            <label htmlFor='show-complete-only' className='w-full py-2 ml-1 text-sm text-gray-900'>*/}
+                    {/*                Show Complete only*/}
+                    {/*            </label>*/}
+                    {/*        </div>*/}
+
+                    {/*        <div key='show-incomplete-only' className='pl-3'>*/}
+                    {/*            <input*/}
+                    {/*                type='checkbox'*/}
+                    {/*                id='show-incomplete-only'*/}
+                    {/*                className='text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2'*/}
+                    {/*                name='Show incomplete only'*/}
+                    {/*                value=''*/}
+                    {/*                onChange={(e) => {*/}
+                    {/*                    toggleShowIncompleteOnly(e.target.checked)*/}
+                    {/*                }}*/}
+                    {/*            />*/}
+                    {/*            <label htmlFor='show-incomplete-only' className='w-full py-2 ml-1 text-sm text-gray-900'>*/}
+                    {/*                Show incomplete only*/}
+                    {/*            </label>*/}
+                    {/*        </div>*/}
+                    {/*    </li>*/}
+                    {/*</ul>*/}
 
                     {/*Filter levels*/}
                     <ul className="pt-2 mt-2 border-t border-gray-400">
