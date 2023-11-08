@@ -59,13 +59,13 @@ const ASVSList: React.FC<Props> = ({
                     </caption>
                     <thead className='text-xs text-gray-700 uppercase bg-gray-200'>
                         <tr>
-                            <th scope='col' className='p-3'>
+                            <th scope='col' className='p-2'>
                                 Chapter, Section & Id
                             </th>
-                            <th scope='col' className='p-3'>
+                            <th scope='col' className='p-2'>
                                 Requirement
                             </th>
-                            <th scope='col' className='p-3'>
+                            <th scope='col' className='p-2'>
                                 Quick reference guide chapter
                             </th>
                         </tr>
@@ -76,8 +76,8 @@ const ASVSList: React.FC<Props> = ({
                             <tr key={`item-${index.toString()}`}
                                 className={`${item.show} ${!item.show ? 'hidden' : ''} + " odd:bg-white even:bg-gray-50 border-b"`}
                                 data-cy='asvs-list-item'>
-                                <td className='p-3'>
-                                    <div className="flex items-center flex-wrap">
+                                <td className='p-2 w-1/4'>
+                                    <div className="flex flex-wrap">
                                         <label htmlFor={item.req_id}>
                                             <input
                                                 className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded"
@@ -89,7 +89,7 @@ const ASVSList: React.FC<Props> = ({
                                                     setItemStatus(item.req_id, e.target.checked);
                                                 }}
                                             />
-                                            <span className="font-bold"> {item.section_id} </span> {item.chapter_name} - {item.section_name}
+                                            <span className="font-bold"> {item.section_id} </span> <span className="font-normal"> {item.chapter_name} - {item.section_name} </span>
                                         </label>
 
                                         {item.level1 != "" && <span className='bg-green-200 text-green-900 text-xs font-medium m-1 px-1.5 py-0.5 rounded'>Level 1</span>}
@@ -97,13 +97,13 @@ const ASVSList: React.FC<Props> = ({
                                         {item.level3 != "" && <span className='bg-red-200 text-red-900 text-xs font-medium m-1 px-1.5 py-0.5 rounded'>Level 3</span>}
                                     </div>
                                 </td>
-                                <td className="p-3">
+                                <td className="p-2">
                                     <span className="font-bold">{item.req_id} </span>
                                     <DetectLink>
                                         {item.req_description}
                                     </DetectLink>
                                 </td>
-                                <td className="p-3">
+                                <td className="p-2">
                                     {item.quick_reference}
                                 </td>
                             </tr>
