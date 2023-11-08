@@ -5,17 +5,23 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Root from './pages/root';
 import ErrorPage from './pages/error-page';
 import Tips from './pages/tips';
+import Item from './pages/item';
 
 const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <Root />,
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: 'tips',
-    element: <Tips />,
-  },
+    {
+        path: '/',
+        element: <Root />,
+        errorElement: <ErrorPage />,
+    },
+    {
+        path: '/tips',
+        element: <Tips />,
+    },
+    {
+        path: '/item/:itemId',
+        element: <Item />,
+        errorElement: <ErrorPage />,
+    },
 ]);
 
 const App = () => {

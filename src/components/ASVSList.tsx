@@ -3,6 +3,7 @@ import React from 'react';
 import ASVSSearch from './ASVSSearch';
 import { faThumbtack } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Link } from 'react-router-dom';
 
 type Props = {
     items: ASVSItem[];
@@ -117,7 +118,7 @@ const ASVSList: React.FC<Props> = ({
                                     </div>
                                 </td>
                                 <td className="p-2">
-                                    <span className="font-bold">{item.req_id} </span>
+                                    <Link to={(`item/${item.req_id.split('.').join("_") }`)} className='font-bold hover:underline'>{item.req_id} </Link>
                                     <DetectLink>
                                         {item.req_description}
                                     </DetectLink>

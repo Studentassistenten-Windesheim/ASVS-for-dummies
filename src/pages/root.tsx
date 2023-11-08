@@ -16,7 +16,7 @@ const Root = () => {
         level2: false,
         level3: false,
     });
-    const [showIncompleteOnly, setShowIncompleteOnly] = useState<string>();
+    const [showIncompleteOnly, setShowIncompleteOnly] = useState<string>('all');
     const [pinnedItems, setPinnedItems] = useState<ASVSItem[]>([]);
 
     useEffect(() => {
