@@ -10,7 +10,7 @@ import { isModuleNamespaceObject } from 'util/types';
 import ASVSPinnedItems from '../components/ASVSPinnedItems';
 
 const Root = () => {
-  let AllAsvsItems: ASVSItem[];
+  const [AllAsvsItems, setAllAsvsItems] = useState<ASVSItem[]>([]);
   const [asvsItems, setAsvsItems] = useState<ASVSItem[]>([]);
   const [chapters, setChapters] = useState<ASVSChapter[]>([]);
   const [searchInput, setSearchInput] = useState('');
@@ -38,7 +38,7 @@ const Root = () => {
       ).map((c: any) => {
         return new ASVSChapter(c);
       });
-      AllAsvsItems = items;
+      setAllAsvsItems(items);
       setPinnedItems(pinnedItems);
       setAsvsItems(items);
       setChapters(chapters);
@@ -121,10 +121,15 @@ const Root = () => {
 
   function setItemStatus(itemId: string, completed: boolean): void {
     // Find the item that was clicked
-    const asvsItem = asvsItems.find((item: ASVSItem) => item.req_id == itemId);
+    let asvsItem = asvsItems.find((item: ASVSItem) => item.req_id == itemId);
     if (asvsItem) {
       asvsItem.completed = completed;
     }
+    asvsItem = pinnedItems.find((item: ASVSItem) => item.req_id == itemId);
+    if (asvsItem) {
+      asvsItem.completed = completed;
+    }
+
     localStorage.setItem(itemId, JSON.stringify(completed));
     // Force a new array to be created so that React will re-render the component
     setAsvsItems([...asvsItems]);
@@ -145,10 +150,12 @@ const Root = () => {
         const isPinned = prevPinnedItems.some(
           (item) => item.req_id === asvsItem.req_id
         );
-        const updatedPinnedItems = isPinned
+        let updatedPinnedItems = isPinned
           ? prevPinnedItems.filter((item) => item.req_id !== itemId)
           : [asvsItem, ...prevPinnedItems];
-
+        updatedPinnedItems.sort((a, b) => {
+          return a.req_id.localeCompare(b.req_id, undefined, { numeric: true });
+        });
         localStorage.setItem(
           'pinned-items',
           JSON.stringify(updatedPinnedItems)
@@ -156,6 +163,11 @@ const Root = () => {
         return updatedPinnedItems;
       });
     }
+  }
+
+  function unpinAll(): void {
+    setPinnedItems([]);
+    localStorage.setItem('pinned-items', JSON.stringify(pinnedItems));
   }
 
   return (
@@ -167,6 +179,7 @@ const Root = () => {
         items={pinnedItems}
         setItemStatus={(i: string, c: boolean) => setItemStatus(i, c)}
         setPinStatus={(i: string) => setPinStatus(i)}
+        unpinAll={() => unpinAll()}
       ></ASVSPinnedItems>
       <ASVSListFilter
         chapters={chapters}

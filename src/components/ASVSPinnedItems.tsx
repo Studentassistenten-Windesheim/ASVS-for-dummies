@@ -7,16 +7,19 @@ type Props = {
   items: ASVSItem[];
   setItemStatus: (itemId: string, completed: boolean) => void;
   setPinStatus: (itemId: string) => void;
+  unpinAll: () => void;
 };
 
 const ASVSPinnedItems: React.FC<Props> = ({
   items,
   setItemStatus,
   setPinStatus,
+  unpinAll,
 }) => {
   if (items.length === 0) {
     return <></>;
   }
+
   return (
     <>
       <div
@@ -29,6 +32,12 @@ const ASVSPinnedItems: React.FC<Props> = ({
               <h2 className='p-2'>
                 Pinned items <small>{items.length.toString()}</small>
               </h2>
+              <p
+                className='pt-2 pl-2 text-blue-500 underline text-align-center hover:cursor-pointer hover:text-blue-600'
+                onClick={(e) => unpinAll()}
+              >
+                Unpin all
+              </p>
             </div>
           </caption>
           <thead className='top-0 px-6 py-3 text-xs text-gray-700 uppercase bg-gray-200'>
@@ -45,9 +54,7 @@ const ASVSPinnedItems: React.FC<Props> = ({
             {items.map((item: ASVSItem, index: number) => (
               <tr
                 key={`item-${index.toString()}`}
-                className={`${item.show} ${
-                  !item.show ? 'hidden' : ''
-                } + " odd:bg-white even:bg-gray-50 border-b"`}
+                className={`odd:bg-white even:bg-gray-50 border-b`}
                 data-cy='asvs-pinned-item'
               >
                 <td className='w-4 p-4'>
@@ -71,7 +78,7 @@ const ASVSPinnedItems: React.FC<Props> = ({
                   {item.req_id} &nbsp;
                   {item.req_description}
                   <FontAwesomeIcon
-                    className='absolute top-[-8px] right-[-8px] h-5 w-5 text-[#db0a0a] rotate-45 hover:rotate-0 hover:text-[#9e9e9e] transition duration-300 ease-in-out'
+                    className='absolute top-0 right-0 h-5 w-5 text-[#db0a0a] rotate-45 hover:rotate-0 hover:text-[#9e9e9e] transition duration-300 ease-in-out'
                     icon={faThumbtack}
                     onClick={() => {
                       setPinStatus(item.req_id);
