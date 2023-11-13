@@ -132,16 +132,19 @@ const Root = () => {
 
     return (
         <>
-            <div className="container flex flex-row">
+            <div className="flex">
+                {/*Sidebar*/}
+                <aside className="w-64 fixed p-1 h-[90vh]">
+                    <ASVSListFilter
+                        chapters={chapters}
+                        setChapterCheck={(c: string) => setChapterCheck(c)}
+                        setLevelCheck={(c: string) => setLevelCheck(c)}
+                        toggleShowIncompleteOnly={(c: string) => toggleShowIncompleteOnly(c)}
+                    />
+                </aside>
 
-                <ASVSListFilter
-                    chapters={chapters}
-                    setChapterCheck={(c: string) => setChapterCheck(c)}
-                    setLevelCheck={(c: string) => setLevelCheck(c)}
-                    toggleShowIncompleteOnly={(c: string) => toggleShowIncompleteOnly(c)}
-                />
-
-                <main className="translate-x-[22%] w-5/6 p-1">
+                {/*Main content*/}
+                <main className="flex-1 p-1 pl-64">
                     <h1 className="py-2">
                         ASVS for Dummies <small>(ASVS 4.0)</small>
                     </h1>
@@ -153,6 +156,30 @@ const Root = () => {
                     ></ASVSList>
                 </main>
             </div>
+            {/*
+            <div className="container flex flex-row">
+                <aside className="w-1/6 p-1">
+                    <ASVSListFilter
+                        chapters={chapters}
+                        setChapterCheck={(c: string) => setChapterCheck(c)}
+                        setLevelCheck={(c: string) => setLevelCheck(c)}
+                        toggleShowIncompleteOnly={(c: string) => toggleShowIncompleteOnly(c)}
+                    />
+                </aside>
+
+                <main className="w-5/6 p-1">
+                    <h1 className="py-2">
+                        ASVS for Dummies <small>(ASVS 4.0)</small>
+                    </h1>
+
+                    <ASVSList
+                        items={filteredASVSItems()}
+                        setItemStatus={(i: string, c: boolean) => setItemStatus(i, c)}
+                        setSearchInputCheck={(c: string) => setSearchInputCheck(c)}
+                    ></ASVSList>
+                </main>
+            </div>
+            */}
         </>
     );
 };
