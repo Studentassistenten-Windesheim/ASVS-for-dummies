@@ -53,7 +53,7 @@ const ASVSPinnedItems: React.FC<Props> = ({
           <tbody className='overflow-y-auto align-text-top'>
             {items.map((item: ASVSItem, index: number) => (
               <tr
-                key={`item-${index.toString()}`}
+                key={`pinned-item-${index.toString()}`}
                 className={`odd:bg-white even:bg-gray-50 border-b`}
                 data-cy='asvs-pinned-item'
               >
@@ -62,7 +62,7 @@ const ASVSPinnedItems: React.FC<Props> = ({
                     <input
                       className='w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded'
                       type='checkbox'
-                      id={item.req_id}
+                      id={`pinned-${item.req_id}`}
                       value=''
                       checked={item.completed}
                       onChange={(e) => {

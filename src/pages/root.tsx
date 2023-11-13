@@ -167,7 +167,7 @@ const Root = () => {
 
   function unpinAll(): void {
     setPinnedItems([]);
-    localStorage.setItem('pinned-items', JSON.stringify(pinnedItems));
+    localStorage.setItem('pinned-items', JSON.stringify([]));
   }
 
   return (
