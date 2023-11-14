@@ -1,9 +1,8 @@
-import React, { useCallback, useEffect, useState } from "react"
-import { redirect, redirectDocument, useParams } from "react-router-dom"
+import { useEffect, useState } from "react"
+import { redirectDocument, useParams } from "react-router-dom"
 import { asvsListItemsAPI } from "../api/ASVSApi";
 import ASVSItem from "../model/ASVSItem";
 import DetectLink from "../helpers/DetectLink";
-import NotesSection from "../components/NotesSection";
 import EditableTextField from "../components/EditableTextField";
 
 const Item = () => {
