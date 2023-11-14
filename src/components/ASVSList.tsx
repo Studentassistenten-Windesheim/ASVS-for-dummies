@@ -96,6 +96,7 @@ const ASVSList: React.FC<Props> = ({
             {filteredItems.map((item: ASVSItem, index: number) => (
               <tr
                 key={`item-${index.toString()}`}
+                id={`item-${item.req_id}`}
                 className={`${item.show} ${
                   !item.show ? 'hidden' : ''
                 } + " odd:bg-white even:bg-gray-50 border-b"`}

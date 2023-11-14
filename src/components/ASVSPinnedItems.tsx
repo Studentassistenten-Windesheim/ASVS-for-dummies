@@ -20,6 +20,20 @@ const ASVSPinnedItems: React.FC<Props> = ({
     return <></>;
   }
 
+  function handleClickToScroll(id: string) {
+    const element = document.getElementById(`item-${id}`);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      element.animate(
+        [{ backgroundColor: 'gray' }, { backgroundColor: 'transparent' }],
+        {
+          duration: 1500,
+          easing: 'ease-in-out',
+        }
+      );
+    }
+  }
+
   return (
     <>
       <div
@@ -56,6 +70,9 @@ const ASVSPinnedItems: React.FC<Props> = ({
                 key={`pinned-item-${index.toString()}`}
                 className={`odd:bg-white even:bg-gray-50 border-b`}
                 data-cy='asvs-pinned-item'
+                onClick={() => {
+                  handleClickToScroll(item.req_id);
+                }}
               >
                 <td className='w-4 p-4'>
                   <div className='flex items-center'>
