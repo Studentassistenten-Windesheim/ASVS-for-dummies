@@ -4,6 +4,7 @@ import ASVSSearch from './ASVSSearch';
 import { faThumbtack } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
+import DetectLink from '../helpers/DetectLink';
 
 type Props = {
     items: ASVSItem[];
