@@ -123,7 +123,10 @@ const ASVSList: React.FC<Props> = ({
                                     </DetectLink>
                                 </td>
                                 <td className="relative p-2">
-                                    {item.quick_reference}
+                                    {item.quick_reference} <br />
+                                    {item.cwe != "" && <a href={'https://cwe.mitre.org/data/definitions/' + item.cwe + '.html'} target="_blank" rel="noreferrer" className="font-medium text-blue-600 hover:underline">
+                                        CWE:{item.cwe}
+                                    </a>}
 
                                     <FontAwesomeIcon
                                         className={`absolute top-0 right-0 h-5 w-5 transition duration-300 ease-in-out ${isPinned(item.req_id)
