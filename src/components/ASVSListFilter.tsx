@@ -121,18 +121,18 @@ const ASVSListFilter: React.FC<Props> = ({ chapters, setChapterCheck, setLevelCh
                     }
                 </ul>
 
-                <ul className="pt-2 mt-2 border-t border-gray-400">
-                    <li>
-                        <p className="font-bold">Pinned items</p>
-                    </li>
-                    <li>TEMP LOREM IPSUM</li>
-                    <li>TEMP LOREM IPSUM</li>
-                    <li>TEMP LOREM IPSUM</li>
-                    <li>TEMP LOREM IPSUM</li>
-                    <li>TEMP LOREM IPSUM</li>
-                    <li>TEMP LOREM IPSUM</li>
-                    <li>TEMP LOREM IPSUM</li>
-                </ul>
+                {/*<ul className="pt-2 mt-2 border-t border-gray-400">*/}
+                {/*    <li>*/}
+                {/*        <p className="font-bold">Pinned items</p>*/}
+                {/*    </li>*/}
+                {/*    <li>TEMP LOREM IPSUM</li>*/}
+                {/*    <li>TEMP LOREM IPSUM</li>*/}
+                {/*    <li>TEMP LOREM IPSUM</li>*/}
+                {/*    <li>TEMP LOREM IPSUM</li>*/}
+                {/*    <li>TEMP LOREM IPSUM</li>*/}
+                {/*    <li>TEMP LOREM IPSUM</li>*/}
+                {/*    <li>TEMP LOREM IPSUM</li>*/}
+                {/*</ul>*/}
             </div>
         </>
     );
