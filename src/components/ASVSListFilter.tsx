@@ -1,129 +1,138 @@
 import React from 'react';
 import ASVSChapter from '../model/ASVSChapter';
-import 'flowbite';
+import ASVSChapterFilterItem from './ASVSChapterFilterItem';
 
 type Props = {
     chapters: ASVSChapter[],
     setChapterCheck: (chapterName: string) => void
     setLevelCheck: (levelName: string) => void
-    toggleShowIncompleteOnly: (show: boolean) => void
+    toggleShowIncompleteOnly: (show: string) => void
 }
 
 const ASVSListFilter: React.FC<Props> = ({ chapters, setChapterCheck, setLevelCheck, toggleShowIncompleteOnly }) => {
     return (
         <>
-            <div id='accordion-collapse' data-accordion='collapse' className='py-2'>
+            <div className="rounded-lg h-full shadow p-2 bg-gray-50 font-normal border-gray-400 border overflow-y-scroll">
 
-                {/*Collapse button*/}
-                <button type='button' id='collapse-heading' data-cy='filter-accordion' className='flex items-center justify-between w-full p-2 font-medium text-left text-gray-500 border border-gray-200'
-                    data-accordion-target='#accordion-collapse-body-2' aria-expanded='false' aria-controls='accordion-collapse-body-2'>
-                    <h3>Filters</h3>
-                    <svg data-accordion-icon className='w-3 h-3 rotate-180' aria-hidden='true' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 10 6'>
-                        <path stroke='currentColor' strokeLinecap='round' strokeLinejoin='round' strokeWidth='2' d='M9 5 5 1 1 5' />
-                    </svg>
-                </button>
+                {/*Show complete/incomplete only*/}
+                <p className="font-bold">Completed</p>
+                <ul className="flex w-full flex-wrap gap-1">
+                    <li>
+                        <input type="radio" id="filter-incomplete" name="filter-complete" value="incomplete" className="hidden peer"
+                            onChange={(e) => {
+                                toggleShowIncompleteOnly("incomplete");
+                            }} />
+                        <label htmlFor="filter-incomplete" className="inline-flex w-full p-1 text-gray-900 bg-white border border-gray-200 rounded-lg cursor-pointer peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100">
+                            Incomplete
+                        </label>
+                    </li>
+                    <li>
+                        <input type="radio" id="filter-all" name="filter-complete" value="all" className="hidden peer" defaultChecked
+                            onChange={(e) => {
+                                toggleShowIncompleteOnly("all");
+                            }} />
+                        <label htmlFor="filter-all" className="inline-flex w-full p-1 text-gray-900 bg-white border border-gray-200 rounded-lg cursor-pointer peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100">
+                            All
+                        </label>
+                    </li>
+                    <li>
+                        <input type="radio" id="filter-complete" name="filter-complete" value="complete" className="hidden peer"
+                            onChange={(e) => {
+                                toggleShowIncompleteOnly("complete");
+                            }} />
+                        <label htmlFor="filter-complete" className="inline-flex w-full p-1 text-gray-900 bg-white border border-gray-200 rounded-lg cursor-pointer peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100">
+                            Complete
+                        </label>
+                    </li>
+                </ul>
 
-                {/*Collapsible filters*/}
-                <div id='accordion-collapse-body-2' className='hidden' aria-labelledby='collapse-heading'>
-                    {/* Chapter filters */}
-                    <div key='Chapter-filter' className='flex flex-wrap items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg mb-3'>
-                        <div className='text-xs text-gray-700 uppercase bg-gray-50 border-b w-full px-6 py-3'>Filter chapters</div>
-                        {chapters.map((chapter: ASVSChapter) => (
-                            <div key={chapter.name} className='flex items-center pl-3'>
-                                <input
-                                    type='checkbox'
-                                    id={chapter.name}
-                                    className='text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2'
-                                    name={chapter.name}
-                                    checked={chapter.checked}
-                                    onChange={(e) => {
-                                        setChapterCheck(chapter.name)
-                                    }}
-                                    data-cy='chapter-checkbox'
-                                />
-                                <label htmlFor={chapter.name} className='w-full py-3 ml-2 text-sm font-medium text-gray-900'>{chapter.name}</label>
-                            </div>
-                        ))
-                        }
-                    </div>
+                {/*Filter levels*/}
+                <ul className="pt-2 mt-2 border-t border-gray-400">
+                    <li>
+                        <p className="font-bold">Levels</p>
+                    </li>
 
-                    {/* Level filters */}
-                    <div className='flex'>
-                        <div className='mr-3 flex flex-wrap items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg mb-3'>
-                            <div className='text-xs text-gray-700 uppercase bg-gray-50 border-b w-full px-6 py-3'>Filter levels</div>
-                            <div key='level-1-checkbox' className='flex items-center pl-3'>
-                                <input
-                                    type='checkbox'
-                                    id='level-1-checkbox'
-                                    className='text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2'
-                                    name='level-1'
-                                    value=''
-                                    onChange={(e) => {
-                                        setLevelCheck('level1')
-                                    }}
-                                    data-cy='level-checkbox'
-                                />
-                                <label htmlFor='level-1-checkbox' className='w-full py-3 ml-2 text-sm font-medium text-gray-900'>
-                                    Level 1
-                                </label>
-                            </div>
-
-                            <div key='level-2-checkbox' className='flex items-center pl-3'>
-                                <input
-                                    type='checkbox'
-                                    id='level-2-checkbox'
-                                    className='text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2'
-                                    name='level-2'
-                                    value=''
-                                    onChange={(e) => {
-                                        setLevelCheck('level2')
-                                    }}
-                                    data-cy='level-checkbox'
-                                />
-                                <label htmlFor='level-2-checkbox' className='w-full py-3 ml-2 text-sm font-medium text-gray-900'>
-                                    Level 2
-                                </label>
-                            </div>
-
-                            <div key='level-3-checkbox' className='flex items-center pl-3'>
-                                <input
-                                    type='checkbox'
-                                    id='level-3-checkbox'
-                                    className='text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2'
-                                    name='level-3'
-                                    value=''
-                                    onChange={(e) => {
-                                        setLevelCheck('level3')
-                                    }}
-                                    data-cy='level-checkbox'
-                                />
-                                <label htmlFor='level-3-checkbox' className='w-full py-3 ml-2 text-sm font-medium text-gray-900'>
-                                    Level 3
-                                </label>
-                            </div>
+                    <li>
+                        <div key='level-1-checkbox' className='pl-3'>
+                            <input
+                                type='checkbox'
+                                id='level-1-checkbox'
+                                className='text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2'
+                                name='level-1'
+                                value=''
+                                onChange={(e) => {
+                                    setLevelCheck('level1')
+                                }}
+                                data-cy='level-checkbox'
+                            />
+                            <label htmlFor='level-1-checkbox'>
+                                <span className='bg-green-200 text-green-900 text-xs font-medium m-1 px-1.5 py-0.5 rounded'>Level 1</span>
+                            </label>
                         </div>
+                    </li>
 
-                        {/* Incomplete items filter */}
-                        <div className='flex flex-wrap items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg mb-3'>
-                            <div className='text-xs text-gray-700 uppercase bg-gray-50 border-b w-full px-6 py-3'>Other filters</div>
-                            <div key='show-incomplete-only' className='flex items-center pl-3'>
-                                <input
-                                    type='checkbox'
-                                    id='show-incomplete-only'
-                                    className='text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2'
-                                    name='Show incomplete only'
-                                    value=''
-                                    onChange={(e) => {
-                                        toggleShowIncompleteOnly(e.target.checked)
-                                    }}
-                                />
-                                <label htmlFor='show-incomplete-only' className='w-full py-3 ml-2 text-sm font-medium text-gray-900'>
-                                    Show incomplete only
-                                </label>
-                            </div>
+                    <li>
+                        <div key='level-2-checkbox' className='pl-3'>
+                            <input
+                                type='checkbox'
+                                id='level-2-checkbox'
+                                className='text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2'
+                                name='level-2'
+                                value=''
+                                onChange={(e) => {
+                                    setLevelCheck('level2')
+                                }}
+                                data-cy='level-checkbox'
+                            />
+                            <label htmlFor='level-2-checkbox'>
+                                <span className='bg-yellow-200 text-yellow-900 text-xs font-medium m-1 px-1.5 py-0.5 rounded'>Level 2</span>
+                            </label>
                         </div>
-                    </div>
-                </div>
+                    </li>
+                    <li>
+
+                        <div key='level-3-checkbox' className='pl-3'>
+                            <input
+                                type='checkbox'
+                                id='level-3-checkbox'
+                                className='text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2'
+                                name='level-3'
+                                value=''
+                                onChange={(e) => {
+                                    setLevelCheck('level3')
+                                }}
+                                data-cy='level-checkbox'
+                            />
+                            <label htmlFor='level-3-checkbox'>
+                                <span className='bg-red-200 text-red-900 text-xs font-medium m-1 px-1.5 py-0.5 rounded'>Level 3</span>
+                            </label>
+                        </div>
+                    </li>
+                </ul>
+
+                {/*Filter chapters*/}
+                <ul className="pt-2 mt-2 border-t border-gray-400">
+                    <li>
+                        <p className="font-bold">Chapters</p>
+                    </li>
+                    {chapters.map((chapter: ASVSChapter) => (
+                        <ASVSChapterFilterItem key={chapter.name} name={chapter.name} checked={chapter.checked} toggleFunction={setChapterCheck} ></ASVSChapterFilterItem>
+                    ))
+                    }
+                </ul>
+
+                {/*<ul className="pt-2 mt-2 border-t border-gray-400">*/}
+                {/*    <li>*/}
+                {/*        <p className="font-bold">Pinned items</p>*/}
+                {/*    </li>*/}
+                {/*    <li>TEMP LOREM IPSUM</li>*/}
+                {/*    <li>TEMP LOREM IPSUM</li>*/}
+                {/*    <li>TEMP LOREM IPSUM</li>*/}
+                {/*    <li>TEMP LOREM IPSUM</li>*/}
+                {/*    <li>TEMP LOREM IPSUM</li>*/}
+                {/*    <li>TEMP LOREM IPSUM</li>*/}
+                {/*    <li>TEMP LOREM IPSUM</li>*/}
+                {/*</ul>*/}
             </div>
         </>
     );

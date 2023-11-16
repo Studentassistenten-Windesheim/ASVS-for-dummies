@@ -38,7 +38,7 @@ const App = () => {
         </nav>
       </header>
       <div className='flex justify-center'>
-        <div className='w-4/5 pt-3'>
+        <div className='w-11/12 pt-3'>
           <React.StrictMode>
             <RouterProvider router={router} />
           </React.StrictMode>
