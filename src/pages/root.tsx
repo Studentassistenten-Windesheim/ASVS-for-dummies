@@ -4,11 +4,10 @@ import ASVSListFilter from '../components/ASVSListFilter';
 import ASVSChapter from '../model/ASVSChapter';
 import ASVSItem from '../model/ASVSItem';
 import { asvsListItemsAPI } from '../api/ASVSApi';
-import ASVSSearch from '../components/ASVSSearch';
-import { debug } from 'util';
-import { isModuleNamespaceObject } from 'util/types';
+import ASVSPinnedItems from '../components/ASVSPinnedItems';
 
 const Root = () => {
+    const [AllAsvsItems, setAllAsvsItems] = useState<ASVSItem[]>([]);
     const [asvsItems, setAsvsItems] = useState<ASVSItem[]>([]);
     const [chapters, setChapters] = useState<ASVSChapter[]>([]);
     const [searchInput, setSearchInput] = useState('');
@@ -18,9 +17,15 @@ const Root = () => {
         level3: false,
     });
     const [showIncompleteOnly, setShowIncompleteOnly] = useState<string>();
+    const [pinnedItems, setPinnedItems] = useState<ASVSItem[]>([]);
+
     useEffect(() => {
         const fetchData = async () => {
             const items = await asvsListItemsAPI();
+            const localStorageItems = localStorage.getItem('pinned-items');
+            const pinnedItems = localStorageItems
+                ? JSON.parse(localStorageItems)
+                : [];
 
             const chapters: ASVSChapter[] = Array.from(
                 items.reduce((p: any, c: ASVSItem) => {
@@ -30,7 +35,8 @@ const Root = () => {
             ).map((c: any) => {
                 return new ASVSChapter(c);
             });
-
+            setAllAsvsItems(items);
+            setPinnedItems(pinnedItems);
             setAsvsItems(items);
             setChapters(chapters);
         };
@@ -115,10 +121,15 @@ const Root = () => {
 
     function setItemStatus(itemId: string, completed: boolean): void {
         // Find the item that was clicked
-        const asvsItem = asvsItems.find((item: ASVSItem) => item.req_id == itemId);
+        let asvsItem = asvsItems.find((item: ASVSItem) => item.req_id == itemId);
         if (asvsItem) {
             asvsItem.completed = completed;
         }
+        asvsItem = pinnedItems.find((item: ASVSItem) => item.req_id == itemId);
+        if (asvsItem) {
+            asvsItem.completed = completed;
+        }
+
         localStorage.setItem(itemId, JSON.stringify(completed));
         // Force a new array to be created so that React will re-render the component
         setAsvsItems([...asvsItems]);
@@ -130,6 +141,34 @@ const Root = () => {
         setAsvsItems([...asvsItems]);
     }
 
+    function setPinStatus(itemId: string): void {
+        const asvsItem = AllAsvsItems.find(
+            (item: ASVSItem) => item.req_id === itemId
+        );
+        if (asvsItem) {
+            setPinnedItems((prevPinnedItems) => {
+                const isPinned = prevPinnedItems.some(
+                    (item) => item.req_id === asvsItem.req_id
+                );
+                let updatedPinnedItems = isPinned
+                    ? prevPinnedItems.filter((item) => item.req_id !== itemId)
+                    : [asvsItem, ...prevPinnedItems];
+                updatedPinnedItems.sort((a, b) => {
+                    return a.req_id.localeCompare(b.req_id, undefined, { numeric: true });
+                });
+                localStorage.setItem(
+                    'pinned-items',
+                    JSON.stringify(updatedPinnedItems)
+                );
+                return updatedPinnedItems;
+            });
+        }
+    }
+
+    function unpinAll(): void {
+        setPinnedItems([]);
+        localStorage.setItem('pinned-items', JSON.stringify([]));
+    }
     return (
         <>
             <div className="flex">
@@ -149,37 +188,22 @@ const Root = () => {
                         ASVS for Dummies <small>(ASVS 4.0)</small>
                     </h1>
 
-                    <ASVSList
-                        items={filteredASVSItems()}
+                    <ASVSPinnedItems
+                        items={pinnedItems}
                         setItemStatus={(i: string, c: boolean) => setItemStatus(i, c)}
-                        setSearchInputCheck={(c: string) => setSearchInputCheck(c)}
-                    ></ASVSList>
-                </main>
-            </div>
-            {/*
-            <div className="container flex flex-row">
-                <aside className="w-1/6 p-1">
-                    <ASVSListFilter
-                        chapters={chapters}
-                        setChapterCheck={(c: string) => setChapterCheck(c)}
-                        setLevelCheck={(c: string) => setLevelCheck(c)}
-                        toggleShowIncompleteOnly={(c: string) => toggleShowIncompleteOnly(c)}
-                    />
-                </aside>
-
-                <main className="w-5/6 p-1">
-                    <h1 className="py-2">
-                        ASVS for Dummies <small>(ASVS 4.0)</small>
-                    </h1>
+                        setPinStatus={(i: string) => setPinStatus(i)}
+                        unpinAll={() => unpinAll()}
+                    ></ASVSPinnedItems>
 
                     <ASVSList
                         items={filteredASVSItems()}
+                        pinnedItems={pinnedItems}
                         setItemStatus={(i: string, c: boolean) => setItemStatus(i, c)}
                         setSearchInputCheck={(c: string) => setSearchInputCheck(c)}
+                        setPinStatus={(i: string) => setPinStatus(i)}
                     ></ASVSList>
                 </main>
             </div>
-            */}
         </>
     );
 };
