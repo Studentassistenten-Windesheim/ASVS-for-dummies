@@ -51,13 +51,13 @@ const Item = () => {
             </div>
 
             {/*Tips and help*/}
-            <div className="mb-4">
-                <h2 className="text-2xl font-semibold">Tips and help</h2>
-                <ul className="list-disc pl-4">
-                    <li>Tip 1</li>
-                    <li>Tip 2</li>
-                </ul>
-            </div>
+            {/*<div className="mb-4">*/}
+            {/*    <h2 className="text-2xl font-semibold">Tips and help</h2>*/}
+            {/*    <ul className="list-disc pl-4">*/}
+            {/*        <li>Tip 1</li>*/}
+            {/*        <li>Tip 2</li>*/}
+            {/*    </ul>*/}
+            {/*</div>*/}
 
             {/*Quick reference and CWE*/}
             <div className="mb-4">

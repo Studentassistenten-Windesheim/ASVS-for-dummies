@@ -29,8 +29,7 @@ const ASVSList: React.FC<Props> = ({
     };
 
     return (
-        <>
-            <div className='flex-grow overflow-auto shadow-md sm:rounded-lg'>
+        <div className='flex-grow overflow-auto shadow-md sm:rounded-lg'>
                 <table className='w-full text-base text-left text-gray-900'>
                     <caption className='p-1 text-lg font-semibold text-left text-gray-900 bg-gray-50'>
                         <div className='flex flex-wrap items-center'>
@@ -114,7 +113,6 @@ const ASVSList: React.FC<Props> = ({
                     </tbody>
                 </table>
             </div>
-        </>
     );
 }
 
