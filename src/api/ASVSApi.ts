@@ -1,11 +1,3 @@
-
-//                 if (chapterToQuickReferenceMap[n.chapter_name]) {
-//                     n.measuments =
-//                         `Technische maatregelen in OWASP Quickreference hoofdstuk '${chapterToQuickReferenceMap[n.chapter_name]}'`;
-//
-//
-//               }
-
 export const chapterToQuickReferenceMap: any = {
     "Session Management": ["Session Management"],
     "Authentication": ["Authentication and Password Management"],

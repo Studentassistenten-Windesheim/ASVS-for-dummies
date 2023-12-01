@@ -3,6 +3,8 @@ import React from 'react';
 import ASVSSearch from './ASVSSearch';
 import { faThumbtack } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Link } from 'react-router-dom';
+import DetectLink from '../helpers/DetectLink';
 
 type Props = {
     items: ASVSItem[];
@@ -10,39 +12,6 @@ type Props = {
     setItemStatus: (itemId: string, completed: boolean) => void;
     setSearchInputCheck: (searchInput: string) => void;
     setPinStatus: (itemId: string) => void;
-};
-
-// Detect links in text and make them clickable
-const DetectLink = ({ children }: any) => {
-    const extractUrl = (word: string) => {
-        const urlPattern = /\((https?:\/\/\S+?)\)/g; // Regex pattern to find links
-        const match = urlPattern.exec(word);
-        return match ? match[1] : null;
-    };
-
-    const url = extractUrl(children);
-
-    if (url) {
-        // If a URL is found, split the children into parts (text before URL and URL)
-        const parts = children.split(url);
-
-        return (
-            <span>
-                {parts[0]} {/* Render text before the URL */}
-                <a
-                    href={url}
-                    target='_blank'
-                    rel='noreferrer'
-                    className='font-medium text-blue-600 hover:underline'
-                >
-                    {url}
-                </a>
-                {parts[1]} {/* Render text after the URL */}
-            </span>
-        );
-    } else {
-        return <span>{children}</span>;
-    }
 };
 
 const ASVSList: React.FC<Props> = ({
@@ -60,8 +29,7 @@ const ASVSList: React.FC<Props> = ({
     };
 
     return (
-        <>
-            <div className='flex-grow overflow-auto shadow-md sm:rounded-lg'>
+        <div className='flex-grow overflow-auto shadow-md sm:rounded-lg'>
                 <table className='w-full text-base text-left text-gray-900'>
                     <caption className='p-1 text-lg font-semibold text-left text-gray-900 bg-gray-50'>
                         <div className='flex flex-wrap items-center'>
@@ -117,7 +85,7 @@ const ASVSList: React.FC<Props> = ({
                                     </div>
                                 </td>
                                 <td className="p-2">
-                                    <span className="font-bold">{item.req_id} </span>
+                                    <Link to={(`item/${item.req_id.split('.').join("_") }`)} className='font-bold hover:underline'>{item.req_id} </Link>
                                     <DetectLink>
                                         {item.req_description}
                                     </DetectLink>
@@ -145,7 +113,6 @@ const ASVSList: React.FC<Props> = ({
                     </tbody>
                 </table>
             </div>
-        </>
     );
 }
 

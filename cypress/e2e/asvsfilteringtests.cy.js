@@ -11,7 +11,6 @@ describe('Filter items', () => {
   });
 
   it('should filter ASVS items by chapter', () => {
-    openFilterAccordion();
     cy.get('[data-cy=chapter-checkbox]').eq(0).check();
     // Check if all items contain the text: "Architecture, Design and Threat Modeling"
     cy.get('[data-cy=asvs-list-item].true').should(
@@ -21,19 +20,16 @@ describe('Filter items', () => {
   });
 
   it('should filter ASVS items by level', () => {
-    openFilterAccordion();
     cy.get('[data-cy=level-checkbox]').eq(0).check();
     cy.get('[data-cy=asvs-list-item].true').should('have.length.gt', 0);
   });
 
   it('should show ASVS items when a chapter is clicked', () => {
-    openFilterAccordion();
     cy.get('[data-cy=chapter-checkbox]').first().check();
     cy.get('[data-cy=asvs-list-item].true').should('have.length.gt', 0);
   });
 
   it('should show all ASVS items when no chapter is clicked', () => {
-    openFilterAccordion();
     cy.get('[data-cy=chapter-checkbox]').first().check();
     cy.get('[data-cy=chapter-checkbox]').first().uncheck();
     cy.get('[data-cy=asvs-list-item].true').should('have.length.gt', 0);
@@ -46,7 +42,6 @@ describe('Filter items', () => {
   });
 
   it('should set the focus to the search bar when / is pressed', () => {
-    openFilterAccordion();
     // Stupid workaround because I couldn't trigger a keypress on either cy.document or cy.get('body')
     cy.get('[data-cy=chapter-checkbox]').first().trigger('keyup', { key: '/' });
     cy.focused().should('have.id', 'search-bar');
@@ -70,11 +65,3 @@ describe('Filter items', () => {
   });
 });
 
-function openFilterAccordion() {
-  // TODO: use the click on accordion button
-  // This currently does not work, because cypress does not init flowbite
-  // cy.get('data-cy=filter-accordion').click();
-  cy.get('#accordion-collapse-body-2').then(function ($input) {
-    $input[0].setAttribute('class', '');
-  });
-}
